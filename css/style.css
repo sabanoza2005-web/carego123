@@ -1,0 +1,334 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f3f3f3;
+    color: #111;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background-color: #000b58;
+    padding: 20px 0;
+    /* Figmaში ქონდა ეს ზომები მითითებული და მაგიტო (ჩემი აზრით საერთოდ არ უნდა)   */
+    line-height: 205px;
+}
+
+nav{
+    width: 90%;
+    margin: auto;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h2{
+    color: white;
+    font-size: 32px;
+}
+
+nav ul{
+    list-style: none;
+
+    display: flex;
+    gap: 50px;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+nav a:hover{
+    color: #d4d4d4;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero h1{
+    color: #c11212;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.services{
+    width: 90%;
+    margin: 40px auto;
+
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 35px;
+}
+
+.service-card{
+    background: white;
+
+    border: 2px solid #0047ff;
+    border-radius: 25px;
+
+    height: 250px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.3s;
+}
+
+.service-card:hover{
+    transform: translateY(-5px);
+}
+
+.service-card img{
+    width: 80px;
+    margin-bottom: 25px;
+}
+
+.service-card h3{
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+/* =========================
+   FEEDBACK BUTTON
+========================= */
+
+.feedback-section{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.feedback-section button{
+    width: 320px;
+    height: 75px;
+
+    border: none;
+    border-radius: 50px;
+
+    background-color: #000b58;
+    color: white;
+
+    font-size: 22px;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.feedback-section button:hover{
+    background-color: #0029b8;
+}
+
+/* =========================
+   NURSES
+========================= */
+
+.nurses{
+    width: 90%;
+    margin: auto;
+    padding-bottom: 60px;
+}
+
+.nurses h2{
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+.nurses-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 25px;
+}
+
+.nurse-card{
+    background-color: white;
+
+    border: 1px solid #bdbdbd;
+    border-radius: 25px;
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+.nurse-card img{
+    width: 140px;
+    height: 140px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    margin-bottom: 20px;
+}
+
+.nurse-card h3{
+    margin-bottom: 15px;
+}
+
+.nurse-card p{
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.nurse-card button{
+    margin-top: 15px;
+
+    border: none;
+
+    background-color: #6ecf71;
+    color: white;
+
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background-color: #000b58;
+    color: white;
+
+    padding: 50px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-left ul{
+    list-style: none;
+}
+
+.footer-left li{
+    margin-bottom: 12px;
+}
+
+.footer-left a{
+    text-decoration: none;
+    color: white;
+}
+
+.footer-right p{
+    margin-bottom: 12px;
+}
+
+/*    facebook logo   */
+.fa-facebook
+{
+color: #1877F2;
+}
+
+/*  instagram logo   */
+.fa-square-instagram
+{
+
+    position: relative;
+    height: 24px;
+    width: 24px;
+    border-radius: 6px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    /* ეს ხაზი გრადიენტს ჭრის ზუსტად ფონტის (ლოგოს) კონტურზე */
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    /* ლოგოს საკუთარ ფერს ვხდით გამჭვირვალეს, რომ მის ქვეშ გრადიენტი გამოჩნდეს */
+    -webkit-text-fill-color: transparent;
+    
+
+    
+    /* ლოგოს ირგვლივ ზედმეტი თეთრი კუთხეები რომ არ დარჩეს */
+    display: inline-block;
+    /*
+    background: linear-gradient
+    (
+        #f09433 0%,
+        #e6683c 25%,
+        #dc2743 50%,
+        #cc2366 75%,
+        #bc1888 100%
+    );
+    */
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:1100px){
+
+    .services{
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .nurses-container{
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    nav{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav ul{
+        gap: 20px;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .services{
+        grid-template-columns: 1fr;
+    }
+
+    .nurses-container{
+        grid-template-columns: 1fr;
+    }
+
+    nav ul{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer{
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .hero h1{
+        font-size: 24px;
+    }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareGo - კოდის დადასტურება</title>
+    <link rel="stylesheet" href="css/verify-code.css">
+</head>
+<body>
+
+    <div class="top-banner"></div>
+
+    <main class="verify-container">
+        
+        <h1 class="page-title">პაროლის აღდგენა</h1>
+        <p class="page-subtitle">შეიყვანეთ ავტორიზაციის კოდი</p>
+
+        <form id="verifyCodeForm" class="verify-form" novalidate>
+            
+            <div class="code-input-row">
+                <input type="text" class="code-digit" maxlength="1" placeholder="•" required>
+                <input type="text" class="code-digit" maxlength="1" placeholder="•" required>
+                <input type="text" class="code-digit" maxlength="1" placeholder="•" required>
+                <input type="text" class="code-digit" maxlength="1" placeholder="•" required>
+                <input type="text" class="code-digit" maxlength="1" placeholder="•" required>
+            </div>
+
+            <div id="errorText" class="error-message"></div>
+
+            <div class="resend-wrapper">
+                კოდი არ მიგიღიათ? <a href="#" id="btnResend" class="resend-link">ხელახლა გაგზავნა</a>
+            </div>
+
+            <button type="submit" class="btn btn-verify">შესვლა</button>
+
+            <div class="divider-wrapper">
+                <span class="divider-line"></span>
+                <span class="divider-text">ან</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="register-redirect">
+                <a href="register.html" class="create-account-link">შექმენით ახალი ანგარიში</a>
+            </div>
+        </form>
+    </main>
+
+    <script src="js/verify-code.js"></script>
+</body>
+</html>

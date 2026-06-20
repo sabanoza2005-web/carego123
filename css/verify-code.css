@@ -1,0 +1,194 @@
+/* =========================================
+   RESET & BASE STYLES
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ზედა მუქი ლურჯი ბანერი (1728 x 150) */
+.top-banner {
+    width: 100%;
+    height: 150px;
+    background-color: #000b58;
+}
+
+/* მთავარი კონტეინერი */
+.verify-container {
+    width: 100%;
+    max-width: 560px; 
+    padding: 50px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* სათაური: "პაროლის აღდგენა" (360 x 44) */
+.page-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+/* ქვესათაური: "შეიყვანეთ ავტორიზაციის კოდი" (274 x 20) */
+.page-subtitle {
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+/* ფორმის სტრუქტურა */
+.verify-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* 5-ციფრიანი კოდის კონტეინერი (500 x 80) */
+.code-input-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+/* სათითაო ციფრის ინფუთი */
+.code-digit {
+    width: 80px; 
+    height: 80px;
+    border: 1px solid #b0b0b0;
+    border-radius: 12px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    outline: none;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease;
+}
+
+.code-digit:focus {
+    border-color: #000b58;
+    box-shadow: 0 0 5px rgba(0, 11, 88, 0.2);
+}
+
+.code-digit::placeholder {
+    color: #b0b0b0;
+    opacity: 0.7;
+}
+
+/* წითელი გაფრთხილების ტექსტის სტილი */
+.error-message {
+    color: #ff0000;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    height: 20px;
+    display: none; /* დეფოლტად დამალულია */
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* "კოდი არ მიგიღიათ? ხელახლა გაგზავნა" (296 x 17) */
+.resend-wrapper {
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 35px;
+}
+
+.resend-link {
+    color: #0056b3;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.resend-link:hover {
+    color: #003d80;
+}
+
+/* შესვლის ღილაკი (518 x 78) */
+.btn-verify {
+    width: 100%;
+    max-width: 518px;
+    height: 78px;
+    background-color: #000b58;
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-verify:hover {
+    background-color: #001399;
+}
+
+/* გამყოფი სექცია */
+.divider-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 518px;
+    margin-bottom: 25px;
+}
+
+.divider-line {
+    width: 150px;
+    height: 1px;
+    background-color: #000b58;
+}
+
+.divider-text {
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+    line-height: 25px;
+}
+
+/* ახალი ანგარიშის ბმული */
+.register-redirect {
+    width: 100%;
+    max-width: 278px;
+    height: 25px;
+}
+
+.create-account-link {
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (MOBILE)
+========================================= */
+@media (max-width: 550px) {
+    .verify-container { padding: 30px 15px; }
+    .code-input-row { height: 60px; gap: 8px; }
+    .code-digit { width: 18%; height: 60px; font-size: 20px; border-radius: 8px; }
+    .btn-verify { height: 60px; font-size: 16px; }
+    .divider-line { width: 80px; }
+}

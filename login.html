@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareGo - შესვლა</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="top-banner"></div>
+
+    <main class="login-container">
+        
+        <h1 class="page-title">შესვლა</h1>
+
+        <form id="authForm" class="login-form" novalidate>
+            
+            <div class="input-group">
+                <input type="email" id="email" placeholder="ელ-ფოსტა" required>
+            </div>
+
+            <div class="input-group password-group">
+                <input type="password" id="password" placeholder="პაროლი" required>
+                <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword"></i>
+            </div>
+
+            <div class="form-options">
+                <label class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <span>დამახსოვრება</span>
+                </label>
+                <a href="forgot-password.html" class="forgot-password">დაგავიწყდათ პაროლი?</a>
+            </div>
+
+            <button type="submit" class="btn btn-login">შესვლა</button>
+            <button type="button" class="btn btn-register" id="btnRegister" <a href="register.html"></a>რეგისტრაცია</button>
+
+            <div class="social-login-row">
+                <button type="button" class="btn-social btn-google">
+                    შესვლა Google-ით <i class="fa-brands fa-google"></i>
+                </button>
+                <button type="button" class="btn-social btn-facebook">
+                    შესვლა Facebook-ით <i class="fa-brands fa-facebook-f"></i>
+                </button>
+            </div>
+
+            <div class="apple-login-row">
+                <button type="button" class="btn-social btn-apple">
+                    შესვლა iOS-ით <i class="fa-brands fa-apple"></i>
+                </button>
+            </div>
+
+        </form>
+
+    </main>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

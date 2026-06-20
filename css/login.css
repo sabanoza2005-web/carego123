@@ -1,0 +1,241 @@
+/* =========================================
+   RESET & BASE STYLES
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ზედა მუქი ლურჯი ზოლი (ბანერი) */
+.top-banner {
+    width: 100%;
+    height: 150px;
+    background-color: #000b58;
+}
+
+/* მთავარი კონტეინერი */
+.login-container {
+    width: 100%;
+    max-width: 460px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* გვერდის სათაური "შესვლა" */
+.page-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 35px;
+}
+
+/* =========================================
+   GLOBAL ERROR MESSAGE STYLE (მაკეტის მიხედვით)
+========================================= */
+.error-message {
+    color: #ff0000 !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    margin-top: -15px !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+    width: 100% !important;
+    display: block !important;
+    line-height: 1.4;
+}
+
+/* =========================================
+   INPUT STYLES
+========================================= */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+.input-group input {
+    width: 100%;
+    height: 55px;
+    padding: 0 25px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    border-radius: 30px;
+    outline: none;
+    color: #111111;
+}
+
+/* პაროლის თვალის ხატულა */
+.password-group input {
+    padding-right: 55px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #333333;
+    font-size: 18px;
+}
+
+/* =========================================
+   CHECKBOX & FORGOT PASSWORD
+========================================= */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    margin-bottom: 5px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #555555;
+}
+
+.remember-me input {
+    width: 16px;
+    height: 16px;
+    accent-color: #000b58;
+    cursor: pointer;
+}
+
+.forgot-password {
+    font-size: 13px;
+    color: #555555;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   BUTTON STYLES
+========================================= */
+.btn {
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-login {
+    background-color: #000000;
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+.btn-login:hover {
+    background-color: #222222;
+}
+
+.btn-register {
+    background-color: #000b58;
+    color: #ffffff;
+}
+
+.btn-register:hover {
+    background-color: #001399;
+}
+
+/* =========================================
+   THIRD-PARTY AUTH (SOCIALS)
+========================================= */
+.social-login-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-social {
+    height: 50px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s ease;
+}
+
+.btn-social:hover {
+    opacity: 0.9;
+}
+
+.btn-google {
+    flex: 1;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+.btn-facebook {
+    flex: 1;
+    background-color: #4f64ff;
+    color: #ffffff;
+    border: none;
+}
+
+.apple-login-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.btn-apple {
+    width: 50%;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px 15px;
+    }
+    
+    .top-banner {
+        height: 100px;
+    }
+    
+    .social-login-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .btn-apple {
+        width: 100%;
+    }
+}

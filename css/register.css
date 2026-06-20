@@ -1,0 +1,143 @@
+/* =========================================
+   RESET & BASE STYLES
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ზედა მუქი ლურჯი საფირმო ზოლი (ზუსტი სიმაღლე მაკეტიდან) */
+.top-banner {
+    width: 100%;
+    height: 150px;
+    background-color: #000b58;
+}
+
+/* მთავარი კონტეინერი */
+.role-selection-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 60px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+/* სათაური: "დარეგისტრირდი როგორც" (ზუსტი ზომები) */
+.page-title {
+    width: 100%;
+    max-width: 494px;
+    height: 44px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================================
+   ROLE CARDS GRID & STYLES
+========================================= */
+.role-cards-grid {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    width: 100%;
+}
+
+/* ინდივიდუალური როლის ბარათი (ზუსტი ზომები მაკეტიდან: 300x350) */
+.role-card {
+    width: 300px;
+    height: 350px;
+    border: 1px solid #333333;
+    border-radius: 20px; /* სუფთა, მომრგვალებული კუთხეები */
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* შიდა ელემენტების თანაბარი განაწილება */
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 45px 20px; /* შიდა დაშორება */
+}
+
+/* ხატულის კონტეინერი */
+.icon-wrapper {
+    font-size: 110px; /* დიდი, მინიმალისტური ხატულა */
+    color: #111111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+/* როლის ტექსტი (ექთანი / მომხმარებელი) */
+.role-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+/* =========================================
+   HOVER EFFECTS
+========================================= */
+.role-card:hover {
+    transform: translateY(-5px);
+    border-color: #000b58;
+    box-shadow: 0 12px 24px rgba(0, 11, 88, 0.08);
+}
+
+.role-card:hover .icon-wrapper {
+    color: #000b58;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (MOBILE)
+========================================= */
+@media (max-width: 700px) {
+    .top-banner {
+        height: 100px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        height: auto;
+        margin-bottom: 40px;
+    }
+
+    .role-cards-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .role-card {
+        width: 280px;
+        height: 330px;
+        padding: 35px 20px;
+    }
+    
+    .icon-wrapper {
+        font-size: 90px;
+    }
+}

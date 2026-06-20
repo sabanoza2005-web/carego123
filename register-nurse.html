@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareGo - ექთნის რეგისტრაცია</title>
+    <link rel="stylesheet" href="css/register-nurse.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="top-banner"></div>
+
+    <main class="register-container">
+        
+        <h1 class="page-title">რეგისტრაცია</h1>
+
+        <form id="nurseRegisterForm" class="register-form" novalidate>
+            
+            <div class="input-row">
+                <div class="input-group half">
+                    <input type="text" id="firstName" placeholder="სახელი" required>
+                </div>
+                <div class="input-group half">
+                    <input type="text" id="lastName" placeholder="გვარი" required>
+                </div>
+            </div>
+
+            <div class="input-group full">
+                <input type="text" id="specialization" placeholder="სპეციალიზაცია" required>
+            </div>
+
+            <div class="input-group full">
+                <input type="text" id="experience" placeholder="სამუშაო გამოცდილება" required>
+            </div>
+
+            <div class="input-group full">
+                <input type="tel" id="phone" placeholder="საკონტაქტო ნომერი" required>
+            </div>
+
+            <div class="input-group full file-upload-group">
+                <label for="diplomaUpload" class="file-label">
+                    <span id="fileNameDisplay">ფოტო/დიპლომი</span>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </label>
+                <input type="file" id="diplomaUpload" accept="image/*,.pdf" hidden>
+            </div>
+
+            <div class="input-group full">
+                <input type="email" id="email" placeholder="ელ-ფოსტა" required>
+            </div>
+
+            <div class="input-group full password-group">
+                <input type="password" id="password" placeholder="პაროლი" required>
+                <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword"></i>
+            </div>
+
+            <button type="submit" class="btn btn-submit">ანგარიშის შექმნა</button>
+
+        </form>
+
+    </main>
+
+    <script src="js/register-nurse.js"></script>
+</body>
+</html>
