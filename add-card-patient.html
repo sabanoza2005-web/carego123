@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareGo - ბარათის დამატება</title>
+    <link rel="stylesheet" href="css/add-card-patient.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="card-container">
+        
+        <div class="card-header">
+            <a href="profile-patient.html" class="back-arrow-btn">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <h1>ბარათის დამატება</h1>
+        </div>
+
+        <form id="addCardForm" class="card-form">
+            
+            <div class="input-group full-width">
+                <input type="text" id="cardNumber" placeholder="ბარათის ნომერი" maxlength="19" required>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group half-width">
+                    <input type="text" id="cardExpiry" placeholder="ვადის ამოწურვის თარიღი" maxlength="5" required>
+                </div>
+                <div class="input-group half-width">
+                    <input type="password" id="cardCvv" placeholder="CVV" maxlength="3" required>
+                </div>
+            </div>
+
+            <div class="payment-methods-section">
+                <h3>გადახდის მეთოდი</h3>
+                <div class="logos-grid">
+                    <div class="method-logo-box">
+                        <img src="images/mastercard.png" alt="Mastercard" class="brand-img">
+                    </div>
+                    <div class="method-logo-box">
+                        <img src="images/visa.png" alt="Visa" class="brand-img">
+                    </div>
+                    <div class="method-logo-box">
+                        <img src="images/unionpay.png" alt="UnionPay" class="brand-img">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-submit-center">
+                <button type="submit" class="submit-card-btn">ბარათის დამატება</button>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="js/add-card-patient.js"></script>
+</body>
+</html>

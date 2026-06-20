@@ -1,0 +1,260 @@
+/* ბაზისური პარამეტრები */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* 1. ნავიგაცია - რეზოლუციის მიხედვით ელასტიური */
+.navbar {
+    width: 100%;
+    max-width: 1728px;
+    height: 150px;
+    background-color: #000c66;
+    display: flex;
+    align-items: center;
+    padding: 0 4%;
+    margin: 0 auto;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 40px;
+    padding-bottom: 5px;
+}
+
+.navbar a.active {
+    border-bottom: 2px solid white;
+}
+
+/* 2. მთავარი კონტეინერი */
+.profile-container {
+    width: 100%;
+    max-width: 1728px;
+    margin: 0 auto;
+    padding: 40px 4%;
+}
+
+/* 3. ზედა ბლოკი: ფოტო და ინფო */
+.profile-header-block {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.profile-avatar {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000c66;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.status-btn {
+    width: 130px;
+    height: 45px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.active-status { background-color: #2ec4b6; color: white; }
+.inactive-status { background-color: #e63946; color: white; }
+
+.profile-info-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+}
+
+.profile-info-details h2 {
+    font-size: 24px;
+    color: #000c66;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.verified-badge { color: #2ec4b6; font-size: 20px; }
+.profile-info-details p { font-size: 16px; color: #333333; }
+
+.edit-profile-btn {
+    width: 350px;
+    height: 60px;
+    background-color: #000c66;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* 4. სათაურები */
+.section-title {
+    font-size: 22px;
+    color: #000c66;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* 5. ცხრილის სათაურის ზოლი */
+.table-columns-header {
+    width: 100%;
+    max-width: 707px;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    border: 1px solid #000c66;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000c66;
+    margin-bottom: 15px;
+}
+
+/* 6. მონაცემთა ბარათების ჩარჩოები (რესპონსიული სიგანე და სიმაღლე) */
+.nurse-data-card {
+    border: 1px solid #000c66;
+    border-radius: 12px;
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* გრძელი ბარათები */
+.long-card {
+    max-width: 1580px;
+    height: 120px;
+}
+
+/* მოკლე ბარათები */
+.short-card {
+    max-width: 850px;
+    height: 120px;
+}
+
+/* 7. მომავალი გამოძახებების განლაგება */
+.future-schedule-layout {
+    display: flex;
+    gap: 5%;
+    align-items: flex-start;
+}
+
+/* კალენდრის ყუთი */
+.nurse-calendar-box {
+    width: 100%;
+    max-width: 652px;
+    height: 491px;
+    border: 1px solid #000c66;
+    border-radius: 12px;
+    padding: 35px 10%;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.calendar-title {
+    text-align: center;
+    color: #000c66;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.calendar-weekdays, .calendar-days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+.calendar-weekdays { font-weight: bold; font-size: 12px; color: #757575; margin-bottom: 20px; }
+.calendar-days-grid { gap: 15px; }
+
+.calendar-day-item { font-size: 14px; padding: 6px 0; color: #333333; border-radius: 4px; }
+.calendar-day-item.blue-highlight { background-color: #000c66; color: white; font-weight: bold; }
+.calendar-day-item.muted-day { color: #bdbdbd; }
+
+.future-cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+/* ==========================================
+   📱 @media ქუერები რესპონსიულობისთვის
+   ========================================== */
+
+/* ტაბლეტებისთვის (ეკრანის სიგანე 1024px-მდე) */
+@media (max-width: 1024px) {
+    .navbar { height: 100px; }
+    
+    .future-schedule-layout {
+        flex-direction: column; /* კალენდარი და პატარა ბარათები ჩავიდეს ერთმანეთის ქვეშ */
+        gap: 30px;
+    }
+    
+    .nurse-calendar-box {
+        max-width: 100%; /* კალენდარი გაიშალოს სრულ სიგანეზე */
+        height: auto;
+        padding: 30px 5%;
+    }
+    
+    /* ოთხკუთხედების (ბარათების) სიმაღლისა და ზომის შემცირება */
+    .long-card, .short-card {
+        height: 100px; 
+    }
+}
+
+/* მობილურებისთვის (ეკრანის სიგანე 768px-მდე) */
+@media (max-width: 768px) {
+    .profile-header-block {
+        flex-direction: column; /* ფოტო და ინფო დალაგდეს ვერტიკალურად */
+        align-items: center;
+        text-align: center;
+    }
+    
+    .profile-info-details h2 {
+        justify-content: center;
+    }
+    
+    .edit-profile-btn {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    /* ოთხკუთხედების სიმაღლის კიდევ უფრო შემცირება მობილურზე */
+    .long-card, .short-card {
+        height: 85px; 
+        border-radius: 8px;
+    }
+    
+    .navbar a {
+        margin-right: 20px;
+        font-size: 14px;
+    }
+}

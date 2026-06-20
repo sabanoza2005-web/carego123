@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareGo - ექთნის პროფილი</title>
+    <link rel="stylesheet" href="css/profile-nurse.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">მთავარი</a>
+        <a href="nurses.html">ექთნები</a>
+        <a href="about.html">ჩვენს შესახებ</a>
+        <a href="contact.html">კონტაქტი</a>
+        <a href="profile-nurse.html" class="active">პროფილი</a>
+    </nav>
+
+    <div class="profile-container">
+        
+        <div class="profile-header-block">
+            <div class="avatar-section">
+                <img src="images/nurse-avatar.png" alt="ანა საპანდელიძე" class="profile-avatar">
+                <button id="statusToggleBtn" class="status-btn active-status">სტატუსი: აქტიური</button>
+            </div>
+
+            <div class="profile-info-details">
+                <h2>ანა საპანდელიძე <i class="fas fa-check-circle verified-badge"></i></h2>
+                <p><strong>სპეციალიზაცია:</strong> რეანიმაციის ექთანი</p>
+                <p><strong>სამუშაო გამოცდილება:</strong> 7 წელი</p>
+                <p><strong>განათლება:</strong> თბილისის სახელმწიფო სამედიცინო უნივერსიტეტი</p>
+                <p><strong>სამუშაო არეალი:</strong> ვაკე-საბურთალო</p>
+                <p><strong>მანიპულაციები:</strong> ინექცია, გადასხმა, ჭრილობის დამუშავება</p>
+                <button class="edit-profile-btn">პროფილის რედაქტირება</button>
+            </div>
+        </div>
+
+        <h3 class="section-title">მიმდინარე გამოძახებები</h3>
+        <div class="current-calls-wrapper">
+            <div class="table-columns-header">
+                <div class="header-col">მისამართი</div>
+                <div class="header-col">გამოძახების მიზეზი</div>
+                <div class="header-col">პაციენტის ასაკი</div>
+            </div>
+            <div class="nurse-data-card long-card"></div>
+            <div class="nurse-data-card long-card"></div>
+        </div>
+
+        <h3 class="section-title">მომავალი გამოძახება</h3>
+        <div class="future-schedule-layout">
+            
+            <div class="nurse-calendar-box">
+                <h4 class="calendar-title" id="calendarTitle">კალენდარი</h4>
+                <div class="calendar-weekdays">
+                    <div>ორ</div><div>სამ</div><div>ოთხ</div><div>ხუთ</div><div>პარ</div><div>შაბ</div><div>კვი</div>
+                </div>
+                <div class="calendar-days-grid" id="profileCalendarGrid"></div>
+            </div>
+
+            <div class="future-cards-wrapper">
+                <div class="nurse-data-card short-card"></div>
+                <div class="nurse-data-card short-card"></div>
+                <div class="nurse-data-card short-card"></div>
+                <div class="nurse-data-card short-card"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/profile-nurse.js"></script>
+</body>
+</html>

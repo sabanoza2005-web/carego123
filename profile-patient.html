@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareGo - პაციენტის პროფილი</title>
+    <link rel="stylesheet" href="css/profile-patient.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">მთავარი</a>
+        <a href="nurses.html">ექთნები</a>
+        <a href="about.html">ჩვენს შესახებ</a>
+        <a href="contact.html">კონტაქტი</a>
+        <a href="profile-patient.html" class="active">პროფილი</a>
+    </nav>
+
+    <div class="patient-profile-container">
+        
+        <div class="patient-info-block">
+            <div class="avatar-wrapper">
+                <div class="patient-avatar-placeholder">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+
+            <div class="patient-details">
+                <h2>სალომე კობლიაშვილი</h2>
+                <p><strong>სახელი:</strong> სალომე</p>
+                <p><strong>გვარი:</strong> კობლიაშვილი</p>
+                <p><strong>საკონტაქტო ნომერი:</strong> 599567987</p>
+                <p><strong>ელ-ფოსტა:</strong> salome.k5@gmail.com</p>
+                
+                <button class="edit-patient-btn">პროფილის რედაქტირება</button>
+            </div>
+        </div>
+
+        <div class="patient-menu-options">
+            
+            <a href="add-card.html" class="menu-option-item">
+                <div class="option-left-content">
+                    <i class="far fa-credit-card option-icon"></i>
+                    <span>ბარათის დამატება</span>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
+            </a>
+
+            <a href="saved-addresses.html" class="menu-option-item">
+                <div class="option-left-content">
+                    <i class="fas fa-map-marker-alt option-icon"></i>
+                    <span>შენახული მისამართები</span>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
+            </a>
+
+            <a href="settings.html" class="menu-option-item">
+                <div class="option-left-content">
+                    <i class="fas fa-cog option-icon"></i>
+                    <span>პარამეტრები</span>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+    <script src="js/profile-patient.js"></script>
+</body>
+</html>
