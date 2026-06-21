@@ -164,7 +164,12 @@
                         <div class="form-group">
                             <label>სამედიცინო ანკეტა</label>
                             <div class="medical-question">
-                                <span>ალერგია მედიკამენტებზე?</span>
+                                <span>ალერგია მედიკამენტებზე</span>
+                                <div class="toggle-switch-buttons">
+                                    <button type="button" class="form-toggle-btn active" id="allergy-yes">კი</button>
+                                    <button type="button" class="form-toggle-btn" id="allergy-no">არა</button>
+                                </div>
+                                <span> ქრონიკული დაავადებები</span>
                                 <div class="toggle-switch-buttons">
                                     <button type="button" class="form-toggle-btn active" id="allergy-yes">კი</button>
                                     <button type="button" class="form-toggle-btn" id="allergy-no">არა</button>
@@ -178,49 +183,50 @@
                 </div>
 
                 <div class="form-group">
-                    <label>კომენტარი (დამატებითი ინფორმაცია)</label>
-                    <textarea class="form-textarea" placeholder="ჩაწერეთ დამატებითი დეტალები საჭიროების შემთხვევაში..."></textarea>
-                </div>
+    <label for="order-comment">კომენტარი (დამატებითი ინფორმაცია)</label>
+    <textarea 
+        class="form-textarea" 
+        id="order-comment" 
+        name="comment" 
+        placeholder="ჩაწერეთ დამატებითი დეტალები საჭიროების შემთხვევაში..."
+        rows="4" 
+        style="width: 100%; resize: vertical;"></textarea>
+</div>
 
-                <div class="center-btn-wrapper" id="action-wrapper-step2">
-                    <button type="button" class="dark-navy-btn" id="revealPatientData">შეავსეთ პაციენტის მონაცემები</button>
-                </div>
+<div class="hidden-patient-subform" id="patient-dynamic-section">
+    
+    <div class="form-group section-divider-top">
+        <div class="datetime-row">
+            <div class="input-with-icon fill-width">
+                <svg class="svg-icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                <input type="text" placeholder="პაციენტის სახელი, გვარი">
+            </div>
+            <div class="input-with-icon fill-width">
+                <svg class="svg-icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <input type="tel" placeholder="ტელეფონის ნომერი">
+            </div>
+        </div>
+    </div>
 
-                <div class="hidden-patient-subform hidden" id="patient-dynamic-section">
-                    
-                    <div class="form-group section-divider-top">
-                        <label class="group-header">პაციენტის მონაცემები</label>
-                        <div class="datetime-row">
-                            <div class="input-with-icon fill-width">
-                                <svg class="svg-icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                                    <circle cx="12" cy="7" r="4" />
-                                </svg>
-                                <input type="text" value="ანა ბერიძე">
-                            </div>
-                            <div class="input-with-icon fill-width">
-                                <svg class="svg-icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                                </svg>
-                                <input type="tel" value="575725442">
-                            </div>
-                        </div>
-                    </div>
+    <div class="receipt-footer-actions spacing-top-large">
+        <div class="dark-invoice-summary-block">
+            <p class="summary-title">გამოძახების შეჯამება</p>
+            <p>ექთნის მომსახურება: X ლარი</p>
+            <p>ტრანსპორტირება: X ლარი</p>
+            <p class="total-highlight">ჯამი: X ლარი</p>
+        </div>
+        <button type="submit" class="dark-navy-btn right-aligned-cta">გამოძახება</button>
+    </div>
 
-                    <div class="receipt-footer-actions spacing-top-large">
-                        <div class="dark-invoice-summary-block">
-                            <p class="summary-title">გამოძახების შეჯამება</p>
-                            <p>ექთნის მომსახურება: X ლარი</p>
-                            <p>ტრანსპორტირება: X ლარი</p>
-                            <p class="total-highlight">ჯამი: X ლარი</p>
-                        </div>
-                        <button type="submit" class="dark-navy-btn right-aligned-cta">გამოძახება</button>
-                    </div>
+</div>
 
-                </div>
-
-            </form>
-        </section>
+</form>
+</section>
 
     </main>
 
