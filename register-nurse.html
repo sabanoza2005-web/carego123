@@ -5,62 +5,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CareGo - ექთნის რეგისტრაცია</title>
     <link rel="stylesheet" href="css/register-nurse.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="top-banner"></div>
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">CareGo</a>
+        <div class="nav-links" id="navLinksContainer"></div>
+    </nav>
 
-    <main class="register-container">
-        
-        <h1 class="page-title">რეგისტრაცია</h1>
+    <div class="registration-container">
+        <h2>ექთნის რეგისტრაცია</h2>
 
-        <form id="nurseRegisterForm" class="register-form" novalidate>
-            
-            <div class="input-row">
-                <div class="input-group half">
-                    <input type="text" id="firstName" placeholder="სახელი" required>
+        <form id="nurseRegisterForm" novalidate>
+            <div class="name-row">
+                <div class="input-wrapper half-width">
+                    <label>სახელი <span class="required-star">*</span></label>
+                    <input type="text" id="nurseName" placeholder="ჩაწერეთ სახელი" required>
+                    <span class="error-msg" id="nameError"></span>
                 </div>
-                <div class="input-group half">
-                    <input type="text" id="lastName" placeholder="გვარი" required>
+                <div class="input-wrapper half-width">
+                    <label>გვარი <span class="required-star">*</span></label>
+                    <input type="text" id="nurseSurname" placeholder="ჩაწერეთ გვარი" required>
+                    <span class="error-msg" id="surnameError"></span>
                 </div>
             </div>
 
-            <div class="input-group full">
-                <input type="text" id="specialization" placeholder="სპეციალიზაცია" required>
+            <div class="form-section">
+                <label>დაბადების თარიღი <span class="required-star">*</span></label>
+                <div class="date-picker-wrapper">
+                    <input type="text" id="dobInput" placeholder="აირჩიეთ დაბადების თარიღი" readonly required>
+                    <span id="calculatedAge" class="age-badge"></span>
+                    
+                    <div id="calendarModal" class="calendar-modal hidden">
+                        <div class="calendar-header">
+                            <button type="button" id="prevCalBtn"><i class="fas fa-chevron-left"></i></button>
+                            <span id="calendarViewLabel">წლები</span>
+                            <button type="button" id="nextCalBtn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div id="calendarBody" class="calendar-body"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="input-group full">
-                <input type="text" id="experience" placeholder="სამუშაო გამოცდილება" required>
+            <div class="form-section invisible-box">
+                <label>სპეციალიზაცია <span class="required-star">*</span></label>
+                <div class="input-inline-row">
+                    <input type="text" id="specInput" placeholder="ჩაწერეთ სპეციალიზაცია">
+                    <button type="button" id="addSpecBtn" class="action-btn">დამატება</button>
+                </div>
+                <div id="specializationsContainer" class="tags-container"></div>
             </div>
 
-            <div class="input-group full">
-                <input type="tel" id="phone" placeholder="საკონტაქტო ნომერი" required>
+            <div class="form-section invisible-box">
+                <label>მანიპულაციები <span class="required-star">*</span></label>
+                <div class="input-inline-row">
+                    <select id="manipulationSelect">
+                        <option value="" disabled selected>აირჩიეთ სერვისი</option>
+                        <option value="ინექცია">ინექცია</option>
+                        <option value="ინფუზია">ინფუზია</option>
+                        <option value="სისხლის აღება">სისხლის აღება</option>
+                        <option value="ჭრილობის დამუშავება">ჭრილობის დამუშავება</option>
+                        <option value="პოსტოპერაციული მოვლა">პოსტოპერაციული მოვლა</option>
+                        <option value="მოხუცის მოვლა">მოხუცის მოვლა</option>
+                        <option value="ექსპრეს-ტესტები">ექსპრეს-ტესტები</option>
+                        <option value="ზონდირება და კათეტერიზაცია">ზონდირება და კათეტერიზაცია</option>
+                        <option value="24 საათიანი მეთვალყურეობა">24 საათიანი მეთვალყურეობა</option>
+                        <option value="რესპირატორული თერაპია">რესპირატორული თერაპია</option>
+                    </select>
+                    <button type="button" id="addManipulationBtn" class="action-btn">დამატება</button>
+                </div>
+                <div id="manipulationsContainer" class="tags-container"></div>
             </div>
 
-            <div class="input-group full file-upload-group">
-                <label for="diplomaUpload" class="file-label">
-                    <span id="fileNameDisplay">ფოტო/დიპლომი</span>
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                </label>
-                <input type="file" id="diplomaUpload" accept="image/*,.pdf" hidden>
+            <div class="form-section invisible-box experience-section">
+                <label>სამუშაო გამოცდილება <span class="required-star">*</span></label>
+                <div class="exp-inputs">
+                    <input type="text" id="expEmployer" placeholder="მიუთითეთ დამსაქმებელი">
+                    <input type="text" id="expPosition" placeholder="მიუთითეთ პოზიცია">
+                    
+                    <div class="exp-dates-row">
+                        <div class="exp-date-wrapper">
+                            <input type="text" id="expStartInput" placeholder="დაწყების თარიღი" readonly>
+                            <div id="startCalendarModal" class="calendar-modal hidden">
+                                <div class="calendar-header">
+                                    <button type="button" id="prevStartCalBtn"><i class="fas fa-chevron-left"></i></button>
+                                    <span id="startCalLabel"></span>
+                                    <button type="button" id="nextStartCalBtn"><i class="fas fa-chevron-right"></i></button>
+                                </div>
+                                <div id="startCalBody" class="calendar-body grid-3"></div>
+                            </div>
+                        </div>
+
+                        <div class="exp-date-wrapper" id="expEndWrapper">
+                            <input type="text" id="expEndInput" placeholder="დასრულების თარიღი" readonly>
+                            <div id="endCalendarModal" class="calendar-modal hidden">
+                                <div class="calendar-header">
+                                    <button type="button" id="prevEndCalBtn"><i class="fas fa-chevron-left"></i></button>
+                                    <span id="endCalLabel"></span>
+                                    <button type="button" id="nextEndCalBtn"><i class="fas fa-chevron-right"></i></button>
+                                </div>
+                                <div id="endCalBody" class="calendar-body grid-3"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="current-job-checkbox">
+                        <input type="checkbox" id="currentJobToggle">
+                        <label for="currentJobToggle">ამჟამად ვმუშაობ ამ პოზიციაზე</label>
+                    </div>
+
+                    <button type="button" id="addExperienceBtn" class="add-exp-submit">გამოცდილების დამატება</button>
+                    <span class="error-msg" id="experienceError"></span>
+                </div>
+                <div id="experienceContainer" class="experience-tags-list"></div>
             </div>
 
-            <div class="input-group full">
-                <input type="email" id="email" placeholder="ელ-ფოსტა" required>
+            <div class="form-section invisible-box">
+                <label>პროფილის ფოტო <span class="required-star">*</span></label>
+                <div class="dropzone" id="avatarDropzone">
+                    <i class="fas fa-user-circle dropzone-icon"></i>
+                    <p>ჩააგდეთ პორტრეტი აქ ან <span>აირჩიეთ ფოტო</span></p>
+                    <small>მხოლოდ 1 ფაილი (.png, .jpg, .jpeg)</small>
+                    <input type="file" id="avatarInput" accept=".png, .jpg, .jpeg" style="display: none;">
+                </div>
+                <div id="avatarFileList" class="uploaded-files-list"></div>
+                <span class="error-msg" id="avatarError"></span>
             </div>
 
-            <div class="input-group full password-group">
-                <input type="password" id="password" placeholder="პაროლი" required>
-                <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword"></i>
+            <div class="form-section invisible-box">
+                <label>დოკუმენტები (დიპლომი, სერტიფიკატები) <span class="required-star">*</span></label>
+                <div class="dropzone" id="docsDropzone">
+                    <i class="fas fa-file-medical dropzone-icon"></i>
+                    <p>ჩააგდეთ დოკუმენტები აქ ან <span>აირჩიეთ ფაილი</span></p>
+                    <small>მისაღები ფორმატები: .png, .jpg, .jpeg, .pdf</small>
+                    <input type="file" id="docsInput" multiple accept=".png, .jpg, .jpeg, .pdf" style="display: none;">
+                </div>
+                <div id="docsFilesList" class="uploaded-files-list"></div>
+                <span class="error-msg" id="docsError"></span>
             </div>
 
-            <button type="submit" class="btn btn-submit">ანგარიშის შექმნა</button>
+            <div class="form-section">
+                
+                <div class="fields-gap-container">
+                    <div class="input-wrapper">
+                        <label>საკონტაქტო ნომერი <span class="required-star">*</span></label>
+                        <input type="text" id="nursePhone" placeholder="">
+                        <span class="error-msg" id="phoneError"></span>
+                    </div>
 
+                    <div class="input-wrapper">
+                        <label>პირადი ნომერი <span class="required-star">*</span></label>
+                        <input type="text" id="nurseId" placeholder="" maxlength="11">
+                        <span class="error-msg" id="idError"></span>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>ელფოსტა <span class="required-star">*</span></label>
+                        <input type="email" id="nurseEmail" placeholder="">
+                        <span class="error-msg" id="emailError"></span>
+                    </div>
+
+                    <div class="input-wrapper password-field-wrapper">
+                        <label>პაროლი <span class="required-star">*</span></label>
+                        <input type="password" id="nursePassword" placeholder="შეიყვანეთ პაროლი">
+                        <i class="fas fa-eye-slash toggle-password-eye" id="togglePassword"></i>
+                        <span class="error-msg" id="passwordError"></span>
+                    </div>
+
+                    <div class="input-wrapper password-field-wrapper">
+                        <label>გაიმეორეთ პაროლი <span class="required-star">*</span></label>
+                        <input type="password" id="nurseConfirmPassword" placeholder="გაიმეორეთ პაროლი">
+                        <i class="fas fa-eye-slash toggle-password-eye" id="toggleConfirmPassword"></i>
+                        <span class="error-msg" id="confirmPasswordError"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-form-btn">რეგისტრაციის დასრულება</button>
         </form>
+    </div>
 
-    </main>
-
+    <script src="js/navbar-router.js"></script>
     <script src="js/register-nurse.js"></script>
 </body>
 </html>
