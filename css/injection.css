@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /* 1. Global Reset & Typography */
 body {
     font-family: 'BPG ExtraSquare Mtavruli', sans-serif;
@@ -552,3 +553,521 @@ body {
         height: 200px; /* Re-assign fixed height for mobile map box */
     }
 }
+=======
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Noto Sans Georgian', 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
+            color: #1a1a2e;
+        }
+
+        /* ── Navbar ── */
+        .navbar {
+            background-color: #001155;
+            padding: 14px 0;
+            width: 100%;
+        }
+        .navbar nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-evenly;
+            padding: 0 20px;
+        }
+        .navbar nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Page wrapper ── */
+        .app-container {
+            max-width: 100%;
+            margin: 30px 0;
+            padding: 0 60px 60px;
+        }
+
+        .frame-view {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hidden { display: none !important; }
+
+        /* ── Section labels (above each block) ── */
+        .field-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #888;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        /* ── Service card row ── */
+        .service-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .service-card {
+            border: 1px solid #c8cdd8;
+            border-radius: 10px;
+            width: 108px;
+            min-width: 108px;
+            height: 108px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            font-weight: 600;
+            font-size: 12px;
+            background: #fff;
+            color: #1a1a2e;
+        }
+
+        .icon-syringe {
+            width: 34px;
+            height: 34px;
+            stroke: #001155;
+        }
+
+        .proc-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .proc-btn {
+            background: #fff;
+            border: 1px solid #c8cdd8;
+            border-radius: 7px;
+            padding: 11px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #1a1a2e;
+            transition: border-color 0.15s;
+        }
+        .proc-btn:hover { border-color: #001155; }
+        .proc-btn .price { color: #888; font-size: 12px; }
+
+        /* ── Upload + map row ── */
+        .upload-map-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .upload-block {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .file-upload-box {
+            border: 1px solid #c8cdd8;
+            border-radius: 7px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 12px;
+            color: #888;
+            transition: border-color 0.15s;
+        }
+        .file-upload-box:hover { border-color: #001155; color: #001155; }
+
+        .location-input {
+            display: flex;
+            align-items: center;
+            border: 1px solid #c8cdd8;
+            border-radius: 7px;
+            padding: 0 12px;
+            background: #fff;
+            height: 40px;
+            gap: 8px;
+        }
+        .location-input:focus-within { border-color: #001155; }
+        .location-input input {
+            border: none;
+            outline: none;
+            font-size: 13px;
+            font-family: inherit;
+            width: 100%;
+            color: #1a1a2e;
+        }
+
+        .map-box {
+            flex: 0.9;
+            border: 1px solid #c8cdd8;
+            border-radius: 7px;
+            background: #e8eaee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px;
+        }
+        .map-box span { font-size: 11px; color: #999; }
+
+        /* ── Date & time as compact pill row ── */
+        .datetime-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .date-pill, .time-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #c8cdd8;
+            border-radius: 7px;
+            padding: 8px 14px;
+            background: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .date-pill { min-width: 110px; }
+        .time-pill { min-width: 100px; }
+
+        .pill-icon {
+            width: 15px;
+            height: 15px;
+            stroke: #888;
+            flex-shrink: 0;
+        }
+
+        /* hidden real time input overlaid */
+        .time-pill input[type="time"] {
+            border: none;
+            outline: none;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: inherit;
+            background: transparent;
+            color: #1a1a2e;
+            width: 70px;
+        }
+
+        /* ── Calendar ── */
+        .cal-time-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .calendar-box {
+            flex: 1;
+            border: 1px solid #c8cdd8;
+            border-radius: 7px;
+            padding: 12px;
+            background: #fff;
+        }
+
+        .cal-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .cal-nav span {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .cal-nav button {
+            background: none;
+            border: 1px solid #c8cdd8;
+            border-radius: 5px;
+            width: 26px;
+            height: 26px;
+            font-size: 16px;
+            cursor: pointer;
+            line-height: 1;
+            color: #333;
+        }
+
+        .cal-nav button:hover { background: #f0f2f5; }
+
+        .cal-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            margin-bottom: 6px;
+        }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+        }
+
+        .cal-grid .cday {
+            text-align: center;
+            padding: 7px 2px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.12s;
+        }
+
+        .cal-grid .cday:hover:not(.cdisabled) { border-color: #001155; }
+        .cal-grid .cday.cselected { background: #001155; color: #fff; }
+        .cal-grid .cday.ctoday { border-color: #001155; color: #001155; font-weight: 700; }
+        .cal-grid .cday.ctoday.cselected { background: #001155; color: #fff; }
+        .cal-grid .cday.cdisabled { color: #ccc; cursor: not-allowed; }
+        .cal-grid .cempty { border: none; cursor: default; }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 140px;
+        }
+
+        /* ── Medical questionnaire ── */
+        .medical-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .medical-left {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .q-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .q-row span {
+            font-size: 13px;
+            color: #1a1a2e;
+        }
+
+        .toggle-btns {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tbtn {
+            border: 1px solid #c8cdd8;
+            border-radius: 20px;
+            padding: 5px 18px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: inherit;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: #1a1a2e;
+        }
+        .tbtn.active {
+            background: #001155;
+            color: #fff;
+            border-color: #001155;
+        }
+
+        .info-box {
+            flex: 0.9;
+            border: 1px solid #c8cdd8;
+            border-radius: 7px;
+            padding: 12px 14px;
+            background: #fff;
+            font-size: 11.5px;
+            color: #555;
+            line-height: 1.55;
+            display: flex;
+            align-items: center;
+        }
+
+        /* ── Comment textarea ── */
+        .comment-textarea {
+            width: 100%;
+            height: 72px;
+            border: 1px solid #c8cdd8;
+            border-radius: 7px;
+            padding: 10px 12px;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            resize: none;
+            color: #1a1a2e;
+            background: #fff;
+        }
+        .comment-textarea:focus { border-color: #001155; }
+
+        /* ── Patient data section ── */
+        .patient-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .patient-input {
+            display: flex;
+            align-items: center;
+            border: 1px solid #c8cdd8;
+            border-radius: 7px;
+            padding: 0 12px;
+            background: #fff;
+            height: 42px;
+            gap: 8px;
+            flex: 1;
+        }
+        .patient-input:focus-within { border-color: #001155; }
+        .patient-input input {
+            border: none;
+            outline: none;
+            font-size: 13px;
+            font-family: inherit;
+            width: 100%;
+            color: #1a1a2e;
+        }
+
+        .p-icon {
+            width: 15px;
+            height: 15px;
+            stroke: #aaa;
+            flex-shrink: 0;
+        }
+
+        /* ── Summary block ── */
+        .summary-block {
+            background: #001155;
+            border-radius: 10px;
+            padding: 16px 20px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .summary-block .s-title {
+            font-size: 13px;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255,255,255,0.18);
+            padding-bottom: 8px;
+            margin-bottom: 4px;
+        }
+
+        .summary-block p {
+            font-size: 12.5px;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .summary-block .total {
+            font-weight: 700;
+            font-size: 14px;
+            color: #00ffcc;
+            margin-top: 4px;
+        }
+
+        /* ── Submit button ── */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            background: #001155;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 14px 0;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: inherit;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .submit-btn:hover { background: #002288; }
+
+        /* ── SVG util ── */
+        .s-icon {
+            width: 15px;
+            height: 15px;
+            stroke: #aaa;
+            flex-shrink: 0;
+        }
+
+        /* ── Step 1 specific ── */
+        .step1-header {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 2px;
+        }
+
+        .action-toggles {
+            display: flex;
+            justify-content: space-around;
+            background: #f7f8fb;
+            border: 1px solid #e2e4ea;
+            border-radius: 7px;
+            padding: 12px;
+        }
+
+        .toggle-link {
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 12.5px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        .toggle-link.underline { text-decoration: underline; color: #001155; }
+
+        .nurses-grid {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nurse-card {
+            flex: 1;
+            border: 1px solid #c8cdd8;
+            border-radius: 8px;
+            padding: 12px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-ph {
+            width: 100%;
+            height: 80px;
+            background: #dde0e8;
+            border-radius: 5px;
+            margin-bottom: 9px;
+        }
+
+        .nurse-card h4 { font-size: 11.5px; font-weight: 600; margin-bottom: 4px; }
+        .nurse-card p  { font-size: 10.5px; color: #555; margin: 0; }
+        .nurse-card .loc { font-size: 10px; color: #999; margin-top: 4px; }
+>>>>>>> Stashed changes
