@@ -1,124 +1,137 @@
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Smooth scroll for navigation & Auth/Profile routing
+  document.querySelectorAll("nav a").forEach((link) => {
+    link.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
+
+      // ვამოწმებთ, დააჭირა თუ არა მომხმარებელმა პროფილის ლინკს
+      if (this.innerText.trim() === "პროფილი") {
+        e.preventDefault(); // ვაჩერებთ სტანდარტულ გადასვლას
+
+        // ვამოწმებთ, არის თუ არა მომხმარებელი უკვე სისტემაში შესული
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+        if (isLoggedIn === "true") {
+          // თუ შესულია, გადაგვყავს პროფილის გვერდზე (მაგ. profile.html)
+          alert("თქვენ უკვე ავტორიზებული ხართ. გადადიხართ პროფილის გვერდზე...");
+          window.location.href = "profile.html";
+        } else {
+          // თუ არ არის შესული, გადაგვყავს ლოგინის გვერდზე
+          window.location.href = "login.html";
+        }
+        return;
+      }
+
+      // სქროლის ლოგიკა შიდა ID (#) ლინკებისთვის
+      if (targetId && targetId.startsWith("#") && targetId !== "#") {
+        e.preventDefault();
+
+        document.querySelector(targetId)?.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
+  // 2. Feedback button interaction
+  const feedbackBtn = document.querySelector(".feedback-section button");
+  if (feedbackBtn) {
+    feedbackBtn.addEventListener("click", () => {
+      alert("მადლობა Feedback-ისთვის! ❤️");
+    });
+  }
+
+  // 3. Nurse card hover & click enhancement
+  const nurseCards = document.querySelectorAll(".nurses .nurse-card");
+  nurseCards.forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      card.style.transform = "scale(1.03)";
+      card.style.transition = "all 0.2s ease";
+      card.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.1)";
+      card.style.cursor = "pointer";
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "scale(1)";
+      card.style.boxShadow = "none";
+    });
+
+    card.addEventListener("click", () => {
+      const nurseName = card.querySelector("h3").innerText;
+      alert(
+        `ექთანთან (${nurseName}) დასაკავშირებლად საჭიროა სისტემაში შესვლა.`
+      );
+      window.location.href = "login.html";
+    });
+  });
+
+  // 4. Service cards click interaction
+  const serviceCards = document.querySelectorAll(".services .service-card");
+  serviceCards.forEach((card) => {
+    card.style.cursor = "pointer";
+    card.addEventListener("click", () => {
+      const title = card.querySelector("h3").innerText;
+      alert(`სერვისის („${title}“) დასაჯავშნად გთხოვთ გაიაროთ ავტორიზაცია.`);
+      window.location.href = "login.html";
+    });
+  });
+});
+
+document.querySelectorAll(".service-card button").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const buttonText = e.target.textContent.trim();
+
+    if (buttonText === "ინექცია") {
+      window.location.href = "injection.html"; // Opens your new page
+    }
+  });
+});
 
 document.addEventListener("DOMContentLoaded", () => {
+  const searchNurseBtn = document.getElementById("search-nurse-btn");
+  const toggleFormBtn = document.getElementById("toggle-form-btn");
 
-    // 1. Smooth scroll for navigation & Auth/Profile routing
-    document.querySelectorAll("nav a").forEach(link => {
-        link.addEventListener("click", function (e) {
-            const targetId = this.getAttribute("href");
+  const nursesSection = document.getElementById("nurses-section");
+  const formView = document.getElementById("form-view");
 
-            // ვამოწმებთ, დააჭირა თუ არა მომხმარებელმა პროფილის ლინკს
-            if (this.innerText.trim() === "პროფილი") {
-                e.preventDefault(); // ვაჩერებთ სტანდარტულ გადასვლას
-                
-                // ვამოწმებთ, არის თუ არა მომხმარებელი უკვე სისტემაში შესული
-                const isLoggedIn = localStorage.getItem("isLoggedIn");
+  searchNurseBtn.addEventListener("click", () => {
+    nursesSection.classList.remove("hidden");
+    formView.classList.add("hidden");
 
-                if (isLoggedIn === "true") {
-                    // თუ შესულია, გადაგვყავს პროფილის გვერდზე (მაგ. profile.html)
-                    alert("თქვენ უკვე ავტორიზებული ხართ. გადადიხართ პროფილის გვერდზე...");
-                    window.location.href = "profile.html"; 
-                } else {
-                    // თუ არ არის შესული, გადაგვყავს ლოგინის გვერდზე
-                    window.location.href = "login.html";
-                }
-                return;
-            }
+    searchNurseBtn.style.borderBottom = "2px solid #000c66";
+    toggleFormBtn.style.borderBottom = "none";
+  });
 
-            // სქროლის ლოგიკა შიდა ID (#) ლინკებისთვის
-            if (targetId && targetId.startsWith("#") && targetId !== "#") {
-                e.preventDefault(); 
+  toggleFormBtn.addEventListener("click", () => {
+    formView.classList.remove("hidden");
+    nursesSection.classList.add("hidden");
 
-                document.querySelector(targetId)?.scrollIntoView({
-                    behavior: "smooth"
-                });
-            }
-        });
-    });
-
-
-    // 2. Feedback button interaction
-    const feedbackBtn = document.querySelector(".feedback-section button");
-    if (feedbackBtn) {
-        feedbackBtn.addEventListener("click", () => {
-            alert("მადლობა Feedback-ისთვის! ❤️");
-        });
-    }
-
-
-    // 3. Nurse card hover & click enhancement
-    const nurseCards = document.querySelectorAll(".nurses .nurse-card");
-    nurseCards.forEach(card => {
-        card.addEventListener("mouseenter", () => {
-            card.style.transform = "scale(1.03)";
-            card.style.transition = "all 0.2s ease";
-            card.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.1)";
-            card.style.cursor = "pointer";
-        });
-
-        card.addEventListener("mouseleave", () => {
-            card.style.transform = "scale(1)";
-            card.style.boxShadow = "none";
-        });
-
-        card.addEventListener("click", () => {
-            const nurseName = card.querySelector("h3").innerText;
-            alert(`ექთანთან (${nurseName}) დასაკავშირებლად საჭიროა სისტემაში შესვლა.`);
-            window.location.href = "login.html";
-        });
-    });
-
-
-    // 4. Service cards click interaction
-    const serviceCards = document.querySelectorAll(".services .service-card");
-    serviceCards.forEach(card => {
-        card.style.cursor = "pointer";
-        card.addEventListener("click", () => {
-            const title = card.querySelector("h3").innerText;
-            alert(`სერვისის („${title}“) დასაჯავშნად გთხოვთ გაიაროთ ავტორიზაცია.`);
-            window.location.href = "login.html";
-        });
-    });
-
+    toggleFormBtn.style.borderBottom = "2px solid #000c66";
+    searchNurseBtn.style.borderBottom = "none";
+  });
 });
 
-document.querySelectorAll('.service-card button').forEach(button => {
-    button.addEventListener('click', (e) => {
-        const buttonText = e.target.textContent.trim();
-        
-        if (buttonText === 'ინექცია') {
-            window.location.href = 'injection.html'; // Opens your new page
-        }
-    });
-});
+//======================================
+document.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("https://carego.onrender.com/api/services");
+  const servicesData = await res.json();
 
+  const servicesEl = document.querySelector(".services");
 
-document.addEventListener('DOMContentLoaded', () => {
-   
-    const searchNurseBtn = document.getElementById('search-nurse-btn');
-    const toggleFormBtn = document.getElementById('toggle-form-btn');
+  servicesData.map((service) => {
 
-   
-    const nursesSection = document.getElementById('nurses-section');
-    const formView = document.getElementById('form-view');
+    const serviceCard = document.createElement("div");
+    serviceCard.classList.add("service-card");
 
+    const img = document.createElement("img");
+    img.src = service.img;
+    img.alt = service.name;
 
-    searchNurseBtn.addEventListener('click', () => {
-    
-        nursesSection.classList.remove('hidden');
-        formView.classList.add('hidden');
+    const h3 = document.createElement("h3");
+    h3.innerText = service.name;
 
-   
-        searchNurseBtn.style.borderBottom = "2px solid #000c66";
-        toggleFormBtn.style.borderBottom = "none";
-    });
+    serviceCard.append(img, h3);
 
-    
-    toggleFormBtn.addEventListener('click', () => {
-     
-        formView.classList.remove('hidden');
-        nursesSection.classList.add('hidden');
-
-        toggleFormBtn.style.borderBottom = "2px solid #000c66";
-        searchNurseBtn.style.borderBottom = "none";
-    });
+    servicesEl.append(serviceCard);
+  });
 });
