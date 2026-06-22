@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ინექცია - მომსახურება</title>
-    <link rel="stylesheet" href="css/injection.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="css/injection.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 </head>
@@ -23,7 +23,6 @@
 
 <main class="app-container">
 
-    <!-- ══ STEP 1 ══ -->
     <section class="frame-view" id="step-1">
 
         <div>
@@ -76,10 +75,8 @@
 
     </section>
 
-    <!-- ══ STEP 2 ══ -->
     <section class="frame-view hidden" id="step-2">
 
-        <!-- Service + procedures -->
         <div>
             <span class="field-label">არჩეული პროცედურა</span>
             <div class="service-row">
@@ -99,7 +96,6 @@
             </div>
         </div>
 
-        <!-- Upload + map -->
         <div>
             <span class="field-label">ატვირთეთ დანიშნულება</span>
             <div class="upload-map-row">
@@ -125,81 +121,9 @@
             </div>
         </div>
 
-<<<<<<< Updated upstream
-                <div class="form-row-split alignment-fix">
-                    <div class="left-inputs">
-                        <div class="form-group">
-                            <label>სამედიცინო ანკეტა</label>
-                            <div class="medical-question">
-                                <span>ალერგია მედიკამენტებზე</span>
-                                <div class="toggle-switch-buttons">
-                                    <button type="button" class="form-toggle-btn active" id="allergy-yes">კი</button>
-                                    <button type="button" class="form-toggle-btn" id="allergy-no">არა</button>
-                                </div>
-                                <span> ქრონიკული დაავადებები</span>
-                                <div class="toggle-switch-buttons">
-                                    <button type="button" class="form-toggle-btn active" id="allergy-yes">კი</button>
-                                    <button type="button" class="form-toggle-btn" id="allergy-no">არა</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-info-text-box" id="allergy-alert-text">
-                        გთხოვთ მიუთითოთ გაქვთ თუ არა რომელიმე მედიკამენტზე ალერგია
-                    </div>
-                </div>
-
-                <div class="form-group">
-    <label for="order-comment">კომენტარი (დამატებითი ინფორმაცია)</label>
-    <textarea 
-        class="form-textarea" 
-        id="order-comment" 
-        name="comment" 
-        placeholder="ჩაწერეთ დამატებითი დეტალები საჭიროების შემთხვევაში..."
-        rows="4" 
-        style="width: 100%; resize: vertical;"></textarea>
-</div>
-
-<div class="hidden-patient-subform" id="patient-dynamic-section">
-    
-    <div class="form-group section-divider-top">
-        <div class="datetime-row">
-            <div class="input-with-icon fill-width">
-                <svg class="svg-icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                </svg>
-                <input type="text" placeholder="პაციენტის სახელი, გვარი">
-            </div>
-            <div class="input-with-icon fill-width">
-                <svg class="svg-icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-                <input type="tel" placeholder="ტელეფონის ნომერი">
-            </div>
-        </div>
-    </div>
-
-    <div class="receipt-footer-actions spacing-top-large">
-        <div class="dark-invoice-summary-block">
-            <p class="summary-title">გამოძახების შეჯამება</p>
-            <p>ექთნის მომსახურება: X ლარი</p>
-            <p>ტრანსპორტირება: X ლარი</p>
-            <p class="total-highlight">ჯამი: X ლარი</p>
-        </div>
-        <button type="submit" class="dark-navy-btn right-aligned-cta">გამოძახება</button>
-    </div>
-
-</div>
-
-</form>
-</section>
-=======
-        <!-- Date & time -->
         <div>
             <span class="field-label">თარიღი და დრო</span>
             <div class="cal-time-row">
-                <!-- Calendar -->
                 <div class="calendar-box">
                     <div class="cal-nav">
                         <button type="button" id="cal-prev">&#8249;</button>
@@ -211,7 +135,6 @@
                     </div>
                     <div class="cal-grid" id="cal-grid"></div>
                 </div>
-                <!-- Time -->
                 <div class="time-box">
                     <span class="field-label">დრო</span>
                     <div class="time-pill">
@@ -225,7 +148,6 @@
             </div>
         </div>
 
-        <!-- Medical questionnaire -->
         <div>
             <span class="field-label">სამედიცინო ანკეტა</span>
             <div class="medical-row">
@@ -251,14 +173,12 @@
             </div>
         </div>
 
-        <!-- Comment -->
+
         <div>
             <span class="field-label">კომენტარი</span>
             <textarea class="comment-textarea" placeholder="ჩაწერეთ დამატებითი დეტალები საჭიროების შემთხვევაში..."></textarea>
         </div>
->>>>>>> Stashed changes
 
-        <!-- Patient data -->
         <div>
             <span class="field-label">პაციენტის მონაცემები</span>
             <div class="patient-row">
@@ -267,18 +187,17 @@
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                         <circle cx="12" cy="7" r="4"/>
                     </svg>
-                    <input type="text" value="ანა ბერიძე" placeholder="სახელი და გვარი">
+                    <input type="text" placeholder="სახელი და გვარი">
                 </div>
                 <div class="patient-input">
                     <svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
-                    <input type="tel" value="575725442" placeholder="ტელეფონი">
+                    <input type="tel" placeholder="ტელეფონი">
                 </div>
             </div>
         </div>
 
-        <!-- Summary -->
         <div class="summary-block">
             <p class="s-title">გამოძახების შეჯამება</p>
             <p>ექთნის მომსახურება: X ლარი</p>
@@ -286,13 +205,10 @@
             <p class="total">ჯამი: X ლარი</p>
         </div>
 
-        <!-- Submit -->
         <button type="button" class="submit-btn" onclick="alert('გამოძახება გაიგზავნა!')">გამოძახების ათვირთვა</button>
 
     </section>
-
 </main>
 <script src="js/script.js"></script>
-
 </body>
 </html>
