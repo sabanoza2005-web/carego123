@@ -84,6 +84,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
+    // Read ?service=injection from the URL, default to 'injection'
+const params = new URLSearchParams(window.location.search);
+const serviceKey = params.get('service') || 'injection';
+const service = SERVICES[serviceKey] || SERVICES['injection'];
+
+// Fill in both step-1 and step-2
+['s1', 's2'].forEach(prefix => {
+    document.getElementById(prefix + '-icon').innerHTML = service.icon;
+    document.getElementById(prefix + '-name').textContent = service.name;
+    const procList = document.getElementById(prefix + '-procs');
+    procList.innerHTML = service.procedures.map(p =>
+        `<div class="proc-btn"><span>${p}</span><span class="price">ფასი</span></div>`
+    ).join('');
+});
+
     // 6. View Toggles (Nurses & Form Views)
     const searchNurseBtn = document.getElementById("search-nurse-btn");
     const toggleFormBtn = document.getElementById("toggle-form-btn");
@@ -306,4 +321,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     renderCalendar();
+});
+
+document.getElementById('file-input').addEventListener('change', function() {
+    const label = document.getElementById('file-label');
+    if (this.files.length > 0) {
+        label.textContent = this.files[0].name;
+    } else {
+        label.textContent = 'ფაილის ატვირთვა';
+    }
 });

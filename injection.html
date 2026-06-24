@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ინექცია - მომსახურება</title>
+    <title>მომსახურება</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="css/injection.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+    <script src="js/services.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
 
@@ -23,24 +25,17 @@
 
 <main class="app-container">
 
+    <!-- STEP 1 -->
     <section class="frame-view" id="step-1">
 
         <div>
             <span class="step1-header">არჩეული პროცედურა</span>
             <div class="service-row" style="margin-top:8px;">
                 <div class="service-card">
-                    <svg class="icon-syringe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                        <line x1="2" y1="22" x2="7" y2="17"/>
-                        <rect x="5.5" y="8.5" width="10" height="7" transform="rotate(-45 10.5 12)" rx="1"/>
-                        <path d="M14.5 6.5l3 3M17 4l3 3M19 2l3 3"/>
-                    </svg>
-                    <span>ინექცია</span>
+                    <svg class="icon-syringe" id="s1-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"></svg>
+                    <span id="s1-name"></span>
                 </div>
-                <div class="proc-list">
-                    <div class="proc-btn"><span>კუნთში ინექცია</span><span class="price">ფასი</span></div>
-                    <div class="proc-btn"><span>ვენაში ინექცია</span><span class="price">ფასი</span></div>
-                    <div class="proc-btn"><span>კანქვეშ ინექცია</span><span class="price">ფასი</span></div>
-                </div>
+                <div class="proc-list" id="s1-procs"></div>
             </div>
         </div>
 
@@ -75,24 +70,17 @@
 
     </section>
 
+    <!-- STEP 2 -->
     <section class="frame-view hidden" id="step-2">
 
         <div>
             <span class="field-label">არჩეული პროცედურა</span>
             <div class="service-row">
                 <div class="service-card">
-                    <svg class="icon-syringe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                        <line x1="2" y1="22" x2="7" y2="17"/>
-                        <rect x="5.5" y="8.5" width="10" height="7" transform="rotate(-45 10.5 12)" rx="1"/>
-                        <path d="M14.5 6.5l3 3M17 4l3 3M19 2l3 3"/>
-                    </svg>
-                    <span>ინექცია</span>
+                    <svg class="icon-syringe" id="s2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"></svg>
+                    <span id="s2-name"></span>
                 </div>
-                <div class="proc-list">
-                    <div class="proc-btn"><span>კუნთში ინექცია</span><span class="price">ფასი</span></div>
-                    <div class="proc-btn"><span>ვენაში ინექცია</span><span class="price">ფასი</span></div>
-                    <div class="proc-btn"><span>კანქვეშ ინექცია</span><span class="price">ფასი</span></div>
-                </div>
+                <div class="proc-list" id="s2-procs"></div>
             </div>
         </div>
 
@@ -100,12 +88,13 @@
             <span class="field-label">ატვირთეთ დანიშნულება</span>
             <div class="upload-map-row">
                 <div class="upload-block">
-                    <div class="file-upload-box">
+                    <label class="file-upload-box" for="file-input">
                         <svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
                         </svg>
-                        ფაილის ატვირთვა
-                    </div>
+                        <span id="file-label">ფაილის ატვირთვა</span>
+                        <input type="file" id="file-input" accept=".pdf,.jpg,.jpeg,.png" style="display:none;">
+                    </label>
                     <div>
                         <span class="field-label">ლოკაცია</span>
                         <div class="location-input">
@@ -117,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="map" style="flex:0.9;min-height:160px;border:1px solid #c8cdd8;border-radius:7px;overflow:hidden;z-index:0;"></div>
+                <div id="map" style="flex:0.9;min-height:200px;border:1px solid #c8cdd8;border-radius:7px;overflow:hidden;z-index:0;"></div>
             </div>
         </div>
 
@@ -173,7 +162,6 @@
             </div>
         </div>
 
-
         <div>
             <span class="field-label">კომენტარი</span>
             <textarea class="comment-textarea" placeholder="ჩაწერეთ დამატებითი დეტალები საჭიროების შემთხვევაში..."></textarea>
@@ -208,7 +196,9 @@
         <button type="button" class="submit-btn" onclick="alert('გამოძახება გაიგზავნა!')">გამოძახების ათვირთვა</button>
 
     </section>
+
 </main>
-<script src="js/script.js"></script>
+
+
 </body>
 </html>
