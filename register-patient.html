@@ -3,48 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareGo - მომხმარებლის რეგისტრაცია</title>
+    <title>CareGo - პაციენტის რეგისტრაცია</title>
     <link rel="stylesheet" href="css/register-patient.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="top-banner"></div>
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">CareGo</a>
+        <div class="nav-links" id="navLinksContainer"></div>
+    </nav>
 
-    <main class="register-container">
-        
-        <h1 class="page-title">რეგისტრაცია</h1>
+    <div class="registration-container">
+        <h2>პაციენტის რეგისტრაცია</h2>
 
-        <form id="patientRegisterForm" class="register-form" novalidate>
-            
-            <div class="input-row">
-                <div class="input-group half">
-                    <input type="text" id="firstName" placeholder="სახელი" required>
+        <form id="patientRegisterForm" novalidate>
+            <div class="name-row">
+                <div class="input-wrapper half-width">
+                    <label>სახელი <span class="required-star">*</span></label>
+                    <input type="text" id="patientName" placeholder="ჩაწერეთ სახელი" required>
+                    <span class="error-msg" id="nameError"></span>
                 </div>
-                <div class="input-group half">
-                    <input type="text" id="lastName" placeholder="გვარი" required>
+                <div class="input-wrapper half-width">
+                    <label>გვარი <span class="required-star">*</span></label>
+                    <input type="text" id="patientSurname" placeholder="ჩაწერეთ გვარი" required>
+                    <span class="error-msg" id="surnameError"></span>
                 </div>
             </div>
 
-            <div class="input-group full">
-                <input type="tel" id="phone" placeholder="საკონტაქტო ნომერი" required>
+            <div class="form-section">
+                <label>დაბადების თარიღი <span class="required-star">*</span></label>
+                <div class="date-picker-wrapper">
+                    <input type="text" id="dobInput" placeholder="აირჩიეთ დაბადების თარიღი" readonly required>
+                    <span id="calculatedAge" class="age-badge"></span>
+                    
+                    <div id="calendarModal" class="calendar-modal hidden">
+                        <div class="calendar-header">
+                            <button type="button" id="prevCalBtn"><i class="fas fa-chevron-left"></i></button>
+                            <span id="calendarViewLabel">წლები</span>
+                            <button type="button" id="nextCalBtn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div id="calendarBody" class="calendar-body"></div>
+                    </div>
+                </div>
+                <span class="error-msg" id="dobError"></span>
             </div>
 
-            <div class="input-group full">
-                <input type="email" id="email" placeholder="ელ-ფოსტა" required>
+            <div class="form-section">
+                
+                <div class="fields-gap-container">
+                    <div class="input-wrapper">
+                        <label>საკონტაქტო ნომერი <span class="required-star">*</span></label>
+                        <input type="text" id="patientPhone" placeholder="">
+                        <span class="error-msg" id="phoneError"></span>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>პირადი ნომერი <span class="required-star">*</span></label>
+                        <input type="text" id="patientId" placeholder="" maxlength="11">
+                        <span class="error-msg" id="idError"></span>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>მისამართი <span class="required-star">*</span></label>
+                        <input type="text" id="patientAddress" placeholder="">
+                        <span class="error-msg" id="addressError"></span>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>ელფოსტა <span class="required-star">*</span></label>
+                        <input type="email" id="patientEmail" placeholder="">
+                        <span class="error-msg" id="emailError"></span>
+                    </div>
+
+                    <div class="input-wrapper password-field-wrapper">
+                        <label>პაროლი <span class="required-star">*</span></label>
+                        <input type="password" id="patientPassword" placeholder="შეიყვანეთ პაროლი">
+                        <i class="fas fa-eye-slash toggle-password-eye" id="togglePassword"></i>
+                        <span class="error-msg" id="passwordError"></span>
+                    </div>
+
+                    <div class="input-wrapper password-field-wrapper">
+                        <label>გაიმეორეთ პაროლი <span class="required-star">*</span></label>
+                        <input type="password" id="patientConfirmPassword" placeholder="გაიმეორეთ პაროლი">
+                        <i class="fas fa-eye-slash toggle-password-eye" id="toggleConfirmPassword"></i>
+                        <span class="error-msg" id="confirmPasswordError"></span>
+                    </div>
+                </div>
             </div>
 
-            <div class="input-group full password-group">
-                <input type="password" id="password" placeholder="პაროლი" required>
-                <i class="fa-regular fa-eye-slash toggle-password" id="togglePassword"></i>
-            </div>
-
-            <button type="submit" class="btn btn-submit">ანგარიშის შექმნა</button>
-
+            <button type="submit" class="submit-form-btn">ანგარიშის შექმნა</button>
         </form>
+    </div>
 
-    </main>
-
+    <script src="js/navbar-router.js"></script>
     <script src="js/register-patient.js"></script>
 </body>
 </html>

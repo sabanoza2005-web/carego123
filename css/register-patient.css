@@ -1,178 +1,216 @@
-/* =========================================
-   RESET & BASE STYLES
-========================================= */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
 }
 
 body {
     background-color: #ffffff;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* ზედა მუქი ლურჯი ბანერი (1728 x 150) */
-.top-banner {
+/* 🌐 ჰედერის სტილი - ფონი ახლა ბოლომდე გადის ეკრანზე */
+.navbar {
     width: 100%;
-    height: 150px;
-    background-color: #000b58;
+    height: 120px;
+    background-color: #000c66;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%; /* შიგთავსი ლამაზად იკავებს ცენტრალურ ნაწილს */
 }
 
-/* მთავარი კონტეინერი */
-.register-container {
+.nav-logo {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links { display: flex; align-items: center; }
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 40px;
+    padding-bottom: 5px;
+    transition: border-bottom 0.2s ease;
+}
+.nav-links a.active { border-bottom: 2px solid white; }
+
+/* 📝 კონტეინერი */
+.registration-container {
     width: 100%;
-    max-width: 540px; /* 500px ღილაკისთვის + 40px შიდა დაშორება */
+    max-width: 600px;
     padding: 40px 20px;
+}
+
+.registration-container h2 {
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    color: #000c66;
+    margin-bottom: 10px;
+    font-size: 28px;
 }
 
-/* სათაური: "რეგისტრაცია" (251 x 44) */
-.page-title {
-    font-size: 32px;
-    font-weight: bold;
-    color: #000000;
+/* 💡 აუცილებელი ველების მინაწერი სათაურის ქვეშ */
+.form-legend {
+    text-align: center;
+    font-size: 13px;
+    color: #666;
     margin-bottom: 35px;
-    text-transform: uppercase;
 }
 
-/* =========================================
-   GLOBAL ERROR MESSAGE STYLE
-========================================= */
-.error-message {
-    color: #ff0000 !important;
-    font-size: 13px !important;
-    font-weight: bold !important;
-    margin-top: -15px !important;
-    margin-bottom: 20px !important;
-    text-align: center !important;
-    width: 100% !important;
-    display: block !important;
-    line-height: 1.4;
+.form-legend .required-star, .required-star {
+    color: #ff3b30;
+    font-weight: bold;
+    margin-left: 3px;
 }
 
-/* =========================================
-   FORM, INPUT & ROW LAYOUTS
-========================================= */
-.register-form {
+/* ❌ შეცდომების შეტყობინებები */
+.error-msg {
+    color: #ff3b30;
+    font-size: 12px;
+    padding-left: 15px;
+    margin-top: 4px;
+    min-height: 16px;
+    display: block;
+}
+
+/* ბადე სახელისა და გვარისთვის */
+.name-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.name-row input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #c2cbde;
+    border-radius: 25px;
+    padding: 0 20px;
+    outline: none;
+}
+
+/* ფორმის სექციები */
+.form-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    width: 100%;
+    margin-bottom: 25px;
 }
 
-/* ორად გაყოფილი ველების ხაზი (სახელი და გვარი) */
-.input-row {
+.form-section label {
+    font-size: 14px;
+    color: #000c66;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+/* სექციის მთავარი სათაურის გამოყოფა (ველის/ჩარჩოს გარეშე) */
+.section-title {
+    font-size: 16px !important;
+    border-bottom: 2px solid #f0f2f5;
+    padding-bottom: 8px;
+    margin-bottom: 20px !important;
+}
+
+/* ინპუტების კონტეინერებს შორის დაშორება */
+.fields-gap-container {
     display: flex;
-    justify-content: center;
-    gap: 16px;
-    width: 100%;
-    max-width: 450px; /* მაკეტის მიხედვით, რომ არ გასცდეს ინფუთების სიგანეს */
+    flex-direction: column;
+    gap: 20px;
 }
 
-.input-group {
-    position: relative;
+.input-wrapper label {
+    font-size: 14px;
+    color: #000c66;
+    margin-bottom: 8px;
+    font-weight: bold;
+    display: block;
 }
 
-/* ნახევარი სიგანის ველი (200 x 62) */
-.input-group.half {
-    width: calc(50% - 8px);
-}
-
-.input-group.half input {
-    height: 62px;
-}
-
-/* სრული სიგანის ველი (450 x 62) */
-.input-group.full {
-    width: 100%;
-    max-width: 450px;
-}
-
-.input-group input {
-    width: 100%;
-    height: 62px; /* ზუსტი სიმაღლე მაკეტიდან */
-    padding: 0 25px;
-    font-size: 16px;
-    border: 1px solid #000000;
-    border-radius: 40px; /* მომრგვალებული ჩარჩო */
+.input-wrapper input {
+    height: 50px;
+    border: 1px solid #c2cbde;
+    border-radius: 25px;
+    padding: 0 20px;
     outline: none;
-    color: #111111;
-}
-
-/* პაროლის თვალის ხატულის ჯგუფი */
-.password-group input {
-    padding-right: 55px;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 22px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #333333;
-    font-size: 18px;
-}
-
-/* =========================================
-   BUTTON STYLES (500 x 75)
-========================================= */
-.btn-submit {
     width: 100%;
-    max-width: 500px; /* ზუსტი ზომა მაკეტიდან */
-    height: 75px; 
-    background-color: #000b58;
-    color: #ffffff;
+}
+
+/* 📅 კალენდრის სტრუქტურა */
+.date-picker-wrapper { position: relative; width: 100%; }
+#dobInput {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #c2cbde;
+    border-radius: 25px;
+    padding: 0 20px;
+    cursor: pointer;
+    background-color: #fff;
+    outline: none;
+}
+
+.age-badge {
+    position: absolute;
+    right: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000c66;
+    top: 16px;
+}
+
+.calendar-modal {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #c2cbde;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    z-index: 100;
+    padding: 15px;
+}
+
+.hidden { display: none !important; }
+.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.calendar-header button { background: none; border: none; color: #000c66; cursor: pointer; font-size: 16px; }
+.calendar-body { display: grid; gap: 5px; }
+.grid-7 { grid-template-columns: repeat(7, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.cal-item { text-align: center; padding: 10px 0; font-size: 14px; cursor: pointer; border-radius: 6px; }
+.cal-item:hover { background-color: #f0f2f5; }
+
+/* 🔒 უსაფრთხოება და პაროლის თვალი */
+.password-field-wrapper { position: relative; }
+.password-field-wrapper .toggle-password-eye {
+    position: absolute;
+    right: 20px;
+    top: 42px; /* ითვალისწინებს ლეიბლის სიმაღლეს */
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
+    z-index: 10;
+}
+
+/* მთავარი ღილაკი */
+.submit-form-btn {
+    width: 100%;
+    height: 55px;
+    background: #000c66;
+    color: white;
     border: none;
-    border-radius: 40px;
+    border-radius: 27px;
     font-size: 16px;
     font-weight: bold;
-    text-transform: uppercase;
     cursor: pointer;
-    margin-top: 15px;
-    transition: background-color 0.2s ease;
-}
-
-.btn-submit:hover {
-    background-color: #001399;
-}
-
-/* =========================================
-   RESPONSIVE DESIGN (MOBILE)
-========================================= */
-@media (max-width: 500px) {
-    .top-banner {
-        height: 100px;
-    }
-
-    .register-container {
-        padding: 20px 15px;
-    }
-
-    .page-title {
-        font-size: 26px;
-        margin-bottom: 25px;
-    }
-
-    .input-row {
-        flex-direction: column;
-        gap: 18px;
-    }
-
-    .input-group.half {
-        width: 100%;
-    }
-
-    .input-group input, .btn-submit {
-        height: 55px;
-    }
+    margin-top: 20px;
 }
