@@ -62,6 +62,62 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.location.href = "login.html";
         });
     });
+    //fetch-popular nurses form api and render
+async function loadNurses() {
+  console.log("test")
+  const container = document.querySelector('.nurses-container');
+
+  try {
+    const response = await fetch('https://carego.onrender.com/api/nurses/popular'); 
+    const json = await response.json();
+
+    if (!json.success || !json.data.length) return;
+
+    // Calculate years of experience from workExperience array
+    function calcExperience(workExperience) {
+      if (!workExperience || workExperience.length === 0) return 0;
+
+      let totalMonths = 0;
+      workExperience.forEach(job => {
+        const start = new Date(job.startDate);
+        const end = job.endDate ? new Date(job.endDate) : new Date();
+        const months =
+          (end.getFullYear() - start.getFullYear()) * 12 +
+          (end.getMonth() - start.getMonth());
+        totalMonths += Math.max(0, months);
+      });
+
+      return Math.round(totalMonths / 12);
+    }
+
+    // Build cards HTML
+    const cardsHTML = json.data.map(nurse => {
+      const years = calcExperience(nurse.workExperience);
+      const specializations = nurse.specialization.join(',\n');
+
+      return `
+        <div class="nurse-card">
+          <img src="${nurse.photoUrl}" alt="ექთანი">
+          <h3>${nurse.firstname} ${nurse.lastname}</h3>
+          <p><strong>გამოცდილება:</strong> ${years} წელი</p>
+          <p>
+            სპეციალიზაცია:
+            ${specializations}
+          </p>
+          <button>✓ ვერიფიცირებული</button>
+        </div>
+      `;
+    }).join('');
+
+    container.innerHTML = cardsHTML;
+
+  } catch (error) {
+    console.error('ექთნების ჩატვირთვა ვერ მოხერხდა:', error);
+  }
+}
+
+// Call on page load
+document.addEventListener('DOMContentLoaded', loadNurses);
 
     // 4. Service cards click interaction
     const serviceCards = document.querySelectorAll(".services .service-card");
@@ -83,6 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
     });
+    
 
     // Read ?service=injection from the URL, default to 'injection'
 const params = new URLSearchParams(window.location.search);
@@ -126,9 +183,9 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
         const res = await fetch("https://carego.onrender.com/api/services");
         const servicesData = await res.json();
         const servicesEl = document.querySelector(".services");
-
+        console.log(servicesData)
         if (servicesEl) {
-            servicesData.forEach((service) => {
+            servicesData.data.forEach((service) => {
                 const serviceCard = document.createElement("div");
                 serviceCard.classList.add("service-card");
 
