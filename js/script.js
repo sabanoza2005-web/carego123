@@ -41,120 +41,98 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // 3. Nurse card hover & click enhancement
-    const nurseCards = document.querySelectorAll(".nurses .nurse-card");
-    nurseCards.forEach((card) => {
-        card.addEventListener("mouseenter", () => {
-            card.style.transform = "scale(1.03)";
-            card.style.transition = "all 0.2s ease";
-            card.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.1)";
-            card.style.cursor = "pointer";
+    // 3. Nurse card click interaction (using event delegation for static & dynamic cards)
+    const nursesContainer = document.querySelector(".nurses-container");
+    if (nursesContainer) {
+        nursesContainer.addEventListener("click", (e) => {
+            const card = e.target.closest(".nurse-card");
+            if (card) {
+                const nurseName = card.querySelector("h3").innerText;
+                alert(`ექთანთან (${nurseName}) დასაკავშირებლად საჭიროა სისტემაში შესვლა.`);
+                window.location.href = "login.html";
+            }
         });
-
-        card.addEventListener("mouseleave", () => {
-            card.style.transform = "scale(1)";
-            card.style.boxShadow = "none";
-        });
-
-        card.addEventListener("click", () => {
-            const nurseName = card.querySelector("h3").innerText;
-            alert(`ექთანთან (${nurseName}) დასაკავშირებლად საჭიროა სისტემაში შესვლა.`);
-            window.location.href = "login.html";
-        });
-    });
-    //fetch-popular nurses form api and render
-async function loadNurses() {
-  console.log("test")
-  const container = document.querySelector('.nurses-container');
-
-  try {
-    const response = await fetch('https://carego.onrender.com/api/nurses/popular'); 
-    const json = await response.json();
-
-    if (!json.success || !json.data.length) return;
-
-    // Calculate years of experience from workExperience array
-    function calcExperience(workExperience) {
-      if (!workExperience || workExperience.length === 0) return 0;
-
-      let totalMonths = 0;
-      workExperience.forEach(job => {
-        const start = new Date(job.startDate);
-        const end = job.endDate ? new Date(job.endDate) : new Date();
-        const months =
-          (end.getFullYear() - start.getFullYear()) * 12 +
-          (end.getMonth() - start.getMonth());
-        totalMonths += Math.max(0, months);
-      });
-
-      return Math.round(totalMonths / 12);
     }
 
-    // Build cards HTML
-    const cardsHTML = json.data.map(nurse => {
-      const years = calcExperience(nurse.workExperience);
-      const specializations = nurse.specialization.join(',\n');
+    //fetch-popular nurses form api and render
+    async function loadNurses() {
+        console.log("test")
+        const container = document.querySelector('.nurses-container');
 
-      return `
+        try {
+            const response = await fetch('https://carego.onrender.com/api/nurses/popular');
+            const json = await response.json();
+
+            if (!json.success || !json.data.length) return;
+
+            // Calculate years of experience from workExperience array
+            function calcExperience(workExperience) {
+                if (!workExperience || workExperience.length === 0) return 0;
+
+                let totalMonths = 0;
+                workExperience.forEach(job => {
+                    const start = new Date(job.startDate);
+                    const end = job.endDate ? new Date(job.endDate) : new Date();
+                    const months =
+                        (end.getFullYear() - start.getFullYear()) * 12 +
+                        (end.getMonth() - start.getMonth());
+                    totalMonths += Math.max(0, months);
+                });
+
+                return Math.round(totalMonths / 12);
+            }
+
+            // Build cards HTML
+            const cardsHTML = json.data.map(nurse => {
+                const years = calcExperience(nurse.workExperience);
+                const specializations = nurse.specialization.join(',\n');
+
+                return `
         <div class="nurse-card">
           <img src="${nurse.photoUrl}" alt="ექთანი">
           <h3>${nurse.firstname} ${nurse.lastname}</h3>
           <p><strong>გამოცდილება:</strong> ${years} წელი</p>
           <p>
-            სპეციალიზაცია:
+            <b>სპეციალიზაცია:</b>
             ${specializations}
           </p>
           <button>✓ ვერიფიცირებული</button>
         </div>
       `;
-    }).join('');
+            }).join('');
 
-    container.innerHTML = cardsHTML;
+            container.insertAdjacentHTML('beforeend', cardsHTML);
 
-  } catch (error) {
-    console.error('ექთნების ჩატვირთვა ვერ მოხერხდა:', error);
-  }
-}
+        } catch (error) {
+            console.error('ექთნების ჩატვირთვა ვერ მოხერხდა:', error);
+        }
+    }
 
-// Call on page load
-document.addEventListener('DOMContentLoaded', loadNurses);
+    // Call on page load
+    loadNurses();
 
-    // 4. Service cards click interaction
-    const serviceCards = document.querySelectorAll(".services .service-card");
-    serviceCards.forEach((card) => {
-        card.style.cursor = "pointer";
-        card.addEventListener("click", () => {
-            const title = card.querySelector("h3").innerText;
-            alert(`სერვისის („${title}“) დასაჯავშნად გთხოვთ გაიაროთ ავტორიზაცია.`);
-            window.location.href = "login.html";
-        });
-    });
 
-    // 5. Service button handler
-    document.querySelectorAll(".service-card button").forEach((button) => {
-        button.addEventListener("click", (e) => {
-            const buttonText = e.target.textContent.trim();
-            if (buttonText === "ინექცია") {
-                window.location.href = "injection.html";
-            }
-        });
-    });
-    
 
     // Read ?service=injection from the URL, default to 'injection'
-const params = new URLSearchParams(window.location.search);
-const serviceKey = params.get('service') || 'injection';
-const service = SERVICES[serviceKey] || SERVICES['injection'];
+    const params = new URLSearchParams(window.location.search);
+    const serviceKey = params.get('service') || 'injection';
 
-// Fill in both step-1 and step-2
-['s1', 's2'].forEach(prefix => {
-    document.getElementById(prefix + '-icon').innerHTML = service.icon;
-    document.getElementById(prefix + '-name').textContent = service.name;
-    const procList = document.getElementById(prefix + '-procs');
-    procList.innerHTML = service.procedures.map(p =>
-        `<div class="proc-btn"><span>${p}</span><span class="price">ფასი</span></div>`
-    ).join('');
-});
+    if (typeof SERVICES !== 'undefined') {
+        const service = SERVICES[serviceKey] || SERVICES['injection'];
+
+        // Fill in both step-1 and step-2
+        ['s1', 's2'].forEach(prefix => {
+            const iconEl = document.getElementById(prefix + '-icon');
+            if (iconEl) {
+                iconEl.innerHTML = service.icon;
+                document.getElementById(prefix + '-name').textContent = service.name;
+                const procList = document.getElementById(prefix + '-procs');
+                procList.innerHTML = service.procedures.map(p =>
+                    `<div class="proc-btn"><span>${p}</span><span class="price">ფასი</span></div>`
+                ).join('');
+            }
+        });
+    }
 
     // 6. View Toggles (Nurses & Form Views)
     const searchNurseBtn = document.getElementById("search-nurse-btn");
@@ -186,8 +164,11 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
         console.log(servicesData)
         if (servicesEl) {
             servicesData.data.forEach((service) => {
-                const serviceCard = document.createElement("div");
+                const serviceCard = document.createElement("a");
                 serviceCard.classList.add("service-card");
+
+                const key = service.service_id || "injection";
+                serviceCard.href = `injection.html?service=${key}`;
 
                 const img = document.createElement("img");
                 img.src = service.img;
@@ -197,6 +178,16 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
                 h3.innerText = service.name;
 
                 serviceCard.append(img, h3);
+
+                // Apply the same logic as in // 4. Service cards click interaction
+                serviceCard.style.cursor = "pointer";
+                serviceCard.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const title = h3.innerText;
+                    alert(`სერვისის („${title}“) დასაჯავშნად გთხოვთ გაიაროთ ავტორიზაცია.`);
+                    window.location.href = "login.html";
+                });
+
                 servicesEl.append(serviceCard);
             });
         }
@@ -207,7 +198,7 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
     // 8. Load Leaflet Map
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
-    script.onload = function() {
+    script.onload = function () {
         const mapContainer = document.getElementById('map');
         if (!mapContainer) return;
 
@@ -220,7 +211,7 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
         let marker = null;
         const locationInput = document.querySelector('.location-input input');
 
-        map.on('click', function(e) {
+        map.on('click', function (e) {
             const { lat, lng } = e.latlng;
 
             if (marker) marker.setLatLng(e.latlng);
@@ -241,7 +232,7 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
         // Search location from text input
         if (locationInput) {
             let searchTimeout;
-            locationInput.addEventListener('input', function() {
+            locationInput.addEventListener('input', function () {
                 clearTimeout(searchTimeout);
                 const val = this.value.trim();
                 if (val.length < 4) return;
@@ -264,7 +255,7 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
         // Re-render map size when view switches to step 2
         const goToStep2Btn = document.getElementById('goToStep2');
         if (goToStep2Btn) {
-            goToStep2Btn.addEventListener('click', function() {
+            goToStep2Btn.addEventListener('click', function () {
                 setTimeout(() => map.invalidateSize(), 100);
             });
         }
@@ -274,7 +265,7 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
     // 9. Multi-step navigation (Step 1 -> Step 2)
     const goToStep2Btn = document.getElementById('goToStep2');
     if (goToStep2Btn) {
-        goToStep2Btn.addEventListener('click', function() {
+        goToStep2Btn.addEventListener('click', function () {
             document.getElementById('step-1')?.classList.add('hidden');
             document.getElementById('step-2')?.classList.remove('hidden');
             window.scrollTo(0, 0);
@@ -283,18 +274,18 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
 
     // 10. Allergy alerts
     const aYes = document.getElementById('allergy-yes');
-    const aNo  = document.getElementById('allergy-no');
-    const box  = document.getElementById('allergy-alert-text');
+    const aNo = document.getElementById('allergy-no');
+    const box = document.getElementById('allergy-alert-text');
 
     if (aYes && aNo && box) {
         aYes.addEventListener('click', () => {
-            aYes.classList.add('active'); 
+            aYes.classList.add('active');
             aNo.classList.remove('active');
             box.innerText = '⚠️ გთხოვთ, ექთანს მოსვლისთანავე წარუდგინოთ დეტალური ინფორმაცია ალერგიის შესახებ!';
             box.style.color = '#c0392b';
         });
         aNo.addEventListener('click', () => {
-            aNo.classList.add('active'); 
+            aNo.classList.add('active');
             aYes.classList.remove('active');
             box.innerText = 'გთხოვთ მიუთითოთ გაქვთ თუ არა რომელიმე მედიკამენტზე ალერგია';
             box.style.color = '#555';
@@ -302,14 +293,14 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
     }
 
     const cYes = document.getElementById('chronic-yes');
-    const cNo  = document.getElementById('chronic-no');
+    const cNo = document.getElementById('chronic-no');
     if (cYes && cNo) {
         cYes.addEventListener('click', () => { cYes.classList.add('active'); cNo.classList.remove('active'); });
-        cNo.addEventListener('click',  () => { cNo.classList.add('active'); cYes.classList.remove('active'); });
+        cNo.addEventListener('click', () => { cNo.classList.add('active'); cYes.classList.remove('active'); });
     }
 
     // 11. Calendar Logic
-    const GEO_MONTHS = ['იანვარი','თებერვალი','მარტი','აპრილი','მაისი','ივნისი','ივლისი','აგვისტო','სექტემბერი','ოქტომბერი','ნოემბერი','დეკემბერი'];
+    const GEO_MONTHS = ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'];
     let calDate = new Date();
     let selectedDay = null;
 
@@ -323,7 +314,7 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
         label.textContent = GEO_MONTHS[month] + ' ' + year;
 
         const today = new Date();
-        today.setHours(0,0,0,0);
+        today.setHours(0, 0, 0, 0);
 
         const firstDay = new Date(year, month, 1);
         let startOffset = firstDay.getDay() - 1;
@@ -344,7 +335,7 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
             cell.textContent = d;
 
             const cellDate = new Date(year, month, d);
-            cellDate.setHours(0,0,0,0);
+            cellDate.setHours(0, 0, 0, 0);
 
             if (cellDate < today) {
                 cell.classList.add('cdisabled');
@@ -352,7 +343,7 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
                 if (cellDate.getTime() === today.getTime()) cell.classList.add('ctoday');
                 if (selectedDay && cellDate.getTime() === selectedDay.getTime()) cell.classList.add('cselected');
 
-                cell.addEventListener('click', function() {
+                cell.addEventListener('click', function () {
                     selectedDay = cellDate;
                     renderCalendar();
                 });
@@ -380,7 +371,7 @@ const service = SERVICES[serviceKey] || SERVICES['injection'];
     renderCalendar();
 });
 
-document.getElementById('file-input').addEventListener('change', function() {
+document.getElementById('file-input').addEventListener('change', function () {
     const label = document.getElementById('file-label');
     if (this.files.length > 0) {
         label.textContent = this.files[0].name;
