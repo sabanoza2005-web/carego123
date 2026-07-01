@@ -112,12 +112,13 @@ nav a:hover{
 
     cursor: pointer;
 
-    transition: 0.25s;
+    transition: all 0.3s ease;
 }
 
 .nurse-card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    transform: scale(1.04);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: #000b58;
 }
 
 .nurse-card img{
@@ -125,6 +126,7 @@ nav a:hover{
     height: 90px;
 
     object-fit: cover;
+    object-position: top;
 
     border-radius: 8px;
 

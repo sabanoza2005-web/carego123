@@ -16,31 +16,67 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 2. ექთნების ბარათებზე Hover ეფექტის გაძლიერება
-    const nurseCards = document.querySelectorAll(".nurse-page .nurse-card");
-    
-    nurseCards.forEach(card => {
-        // მაუსის მიტანისას ბარათის ოდნავ გაზრდა
-        card.addEventListener("mouseenter", () => {
-            card.style.transform = "scale(1.04)";
-            card.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.15)";
-            card.style.borderColor = "#000b58";
-            card.style.transition = "all 0.3s ease";
-            card.style.cursor = "pointer";
+    // 2. Click interaction using event delegation for both static & dynamic cards
+    const grid = document.querySelector(".nurses-grid");
+    if (grid) {
+        grid.addEventListener("click", (e) => {
+            const card = e.target.closest(".nurse-card");
+            if (card) {
+                const nurseName = card.querySelector("h3").innerText;
+                alert(`თქვენ აირჩიეთ ექთანი: ${nurseName}\n\nსისტემა ამოწმებს ექთნის აქტიურ სტატუსს...`);
+            }
         });
+    }
 
-        // მაუსის მოშორებისას საწყის მდგომარეობაში დაბრუნება
-        card.addEventListener("mouseleave", () => {
-            card.style.transform = "scale(1)";
-            card.style.boxShadow = "none";
-            card.style.borderColor = "#bdbdbd";
-        });
+    // 3. Fetch all nurses from API and render them (appended to static cards)
+    async function loadAllNurses() {
+        const container = document.querySelector('.nurses-grid');
+        if (!container) return;
 
-        // 3. ექთანზე დაწკაპუნების (Click) ლოგიკა
-        card.addEventListener("click", () => {
-            const nurseName = card.querySelector("h3").innerText;
-            // დემო ვერსიისთვის გამოვაჩენთ ალერტს, შემდგომში აქ გაიხსნება ექთნის პროფილი ან ჯავშნის ფორმა
-            alert(`თქვენ აირჩიეთ ექთანი: ${nurseName}\n\nსისტემა ამოწმებს ექთნის აქტიურ სტატუსს...`);
-        });
-    });
+        try {
+            const response = await fetch('https://carego.onrender.com/api/nurses');
+            const json = await response.json();
+
+            if (!json.success || !json.data.length) return;
+
+            // Calculate years of experience from workExperience array
+            function calcExperience(workExperience) {
+                if (!workExperience || workExperience.length === 0) return 0;
+
+                let totalMonths = 0;
+                workExperience.forEach(job => {
+                    const start = new Date(job.startDate);
+                    const end = job.endDate ? new Date(job.endDate) : new Date();
+                    const months =
+                        (end.getFullYear() - start.getFullYear()) * 12 +
+                        (end.getMonth() - start.getMonth());
+                    totalMonths += Math.max(0, months);
+                });
+
+                return Math.round(totalMonths / 12);
+            }
+
+            // Build cards HTML
+            const cardsHTML = json.data.map(nurse => {
+                const years = calcExperience(nurse.workExperience);
+                const specializations = nurse.specialization.join(', ');
+
+                return `
+                    <div class="nurse-card">
+                        <img src="${nurse.photoUrl}" alt="ექთანი">
+                        <h3>${nurse.firstname} ${nurse.lastname}</h3>
+                        <p><b>გამოცდილება:</b> ${years} წელი</p>
+                        <p><b>სპეციალიზაცია:</b> ${specializations}</p>
+                    </div>
+                `;
+            }).join('');
+
+            container.insertAdjacentHTML('beforeend', cardsHTML);
+
+        } catch (error) {
+            console.error('ექთნების ჩატვირთვა ვერ მოხერხდა:', error);
+        }
+    }
+
+    loadAllNurses();
 });
