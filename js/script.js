@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 serviceCard.classList.add("service-card");
 
                 const key = service.service_id || "injection";
-                serviceCard.href = `injection.html?service=${key}`;
+                serviceCard.href = `service.html?service=${key}`;
 
                 const img = document.createElement("img");
                 img.src = service.img;
