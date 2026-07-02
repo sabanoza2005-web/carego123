@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     const monthsGeo = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"];
-    
+
     const now = new Date();
     const currentYear = now.getFullYear();
     const currentMonth = now.getMonth();
@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let activeDate = new Date();
     let birthDate = null;
-    let viewMode = "years"; 
+    let viewMode = "years";
     let yearPageStart = 1970;
 
     if (dobInput) {
         dobInput.addEventListener("click", (e) => {
             e.stopPropagation();
-            viewMode = "years"; 
+            viewMode = "years";
             calendarModal.classList.remove("hidden");
             buildCalendar();
         });
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function buildCalendar() {
         if (!calendarBody) return;
         calendarBody.innerHTML = "";
-        
+
         if (viewMode === "years") {
             calendarBody.className = "calendar-body grid-3";
             calendarViewLabel.textContent = `${yearPageStart} - ${yearPageStart + 11}`;
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 calendarBody.appendChild(item);
             }
-        } 
+        }
         else if (viewMode === "months") {
             calendarBody.className = "calendar-body grid-3";
             calendarViewLabel.textContent = activeDate.getFullYear();
@@ -71,18 +71,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 calendarBody.appendChild(item);
             });
-        } 
+        }
         else if (viewMode === "days") {
             calendarBody.className = "calendar-body grid-7";
             const y = activeDate.getFullYear();
             const m = activeDate.getMonth();
             calendarViewLabel.textContent = `${monthsGeo[m]} ${y}`;
-            
+
             const firstDay = (new Date(y, m, 1).getDay() + 6) % 7;
             const daysCount = new Date(y, m + 1, 0).getDate();
-            
+
             for (let i = 0; i < firstDay; i++) calendarBody.appendChild(document.createElement("div"));
-            
+
             for (let d = 1; d <= daysCount; d++) {
                 const item = document.createElement("div");
                 item.className = "cal-item";
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let specializationsList = [];
 
     if (addSpecBtn && specInput) {
-        addSpecBtn.onclick = function() {
+        addSpecBtn.onclick = function () {
             const val = specInput.value.trim();
             if (val && !specializationsList.includes(val)) {
                 specializationsList.push(val);
@@ -174,8 +174,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const manipulationsContainer = document.getElementById("manipulationsContainer");
     let manipulationsList = [];
 
+    if (manipulationSelect) {
+        fetch("https://carego.onrender.com/api/services/names")
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.success && Array.isArray(data.data)) {
+                    data.data.forEach(serviceName => {
+                        const exists = Array.from(manipulationSelect.options).some(
+                            option => option.value.trim() === serviceName.trim()
+                        );
+                        if (!exists) {
+                            const option = document.createElement("option");
+                            option.value = serviceName;
+                            option.textContent = serviceName;
+                            manipulationSelect.appendChild(option);
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("სერვისების ჩატვირთვა ვერ მოხერხდა:", error);
+            });
+    }
+
     if (addManipulationBtn && manipulationSelect) {
-        addManipulationBtn.onclick = function() {
+        addManipulationBtn.onclick = function () {
             const val = manipulationSelect.value;
             if (val && !manipulationsList.includes(val)) {
                 manipulationsList.push(val);
@@ -254,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const body = type === "start" ? startCalBody : endCalBody;
         const label = type === "start" ? startCalLabel : endCalLabel;
         const year = type === "start" ? expStartYear : expEndYear;
-        
+
         body.innerHTML = "";
         label.textContent = year;
 
@@ -284,12 +307,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (prevStartCalBtn) prevStartCalBtn.onclick = (e) => { e.stopPropagation(); expStartYear--; buildExpCalendar("start"); };
-    if (nextStartCalBtn) nextStartCalBtn.onclick = (e) => { e.stopPropagation(); if(expStartYear < currentYear) { expStartYear++; buildExpCalendar("start"); } };
+    if (nextStartCalBtn) nextStartCalBtn.onclick = (e) => { e.stopPropagation(); if (expStartYear < currentYear) { expStartYear++; buildExpCalendar("start"); } };
     if (prevEndCalBtn) prevEndCalBtn.onclick = (e) => { e.stopPropagation(); expEndYear--; buildExpCalendar("end"); };
-    if (nextEndCalBtn) nextEndCalBtn.onclick = (e) => { e.stopPropagation(); if(expEndYear < currentYear) { expEndYear++; buildExpCalendar("end"); } };
+    if (nextEndCalBtn) nextEndCalBtn.onclick = (e) => { e.stopPropagation(); if (expEndYear < currentYear) { expEndYear++; buildExpCalendar("end"); } };
 
     if (addExperienceBtn) {
-        addExperienceBtn.onclick = function() {
+        addExperienceBtn.onclick = function () {
             const emp = expEmployer.value.trim();
             const pos = expPosition.value.trim();
             const startVal = expStartInput.value;
@@ -454,7 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 📝 7. ფორმის საბოლოო ვალიდაცია
     // ==========================================
     const nurseForm = document.getElementById("nurseRegisterForm");
-    
+
     if (nurseForm) {
         nurseForm.addEventListener("submit", (e) => {
             e.preventDefault();

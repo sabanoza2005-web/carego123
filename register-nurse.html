@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ka">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/register-nurse.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
     <nav class="navbar">
@@ -36,7 +38,7 @@
                 <div class="date-picker-wrapper">
                     <input type="text" id="dobInput" placeholder="აირჩიეთ დაბადების თარიღი" readonly required>
                     <span id="calculatedAge" class="age-badge"></span>
-                    
+
                     <div id="calendarModal" class="calendar-modal hidden">
                         <div class="calendar-header">
                             <button type="button" id="prevCalBtn"><i class="fas fa-chevron-left"></i></button>
@@ -62,16 +64,6 @@
                 <div class="input-inline-row">
                     <select id="manipulationSelect">
                         <option value="" disabled selected>აირჩიეთ სერვისი</option>
-                        <option value="ინექცია">ინექცია</option>
-                        <option value="ინფუზია">ინფუზია</option>
-                        <option value="სისხლის აღება">სისხლის აღება</option>
-                        <option value="ჭრილობის დამუშავება">ჭრილობის დამუშავება</option>
-                        <option value="პოსტოპერაციული მოვლა">პოსტოპერაციული მოვლა</option>
-                        <option value="მოხუცის მოვლა">მოხუცის მოვლა</option>
-                        <option value="ექსპრეს-ტესტები">ექსპრეს-ტესტები</option>
-                        <option value="ზონდირება და კათეტერიზაცია">ზონდირება და კათეტერიზაცია</option>
-                        <option value="24 საათიანი მეთვალყურეობა">24 საათიანი მეთვალყურეობა</option>
-                        <option value="რესპირატორული თერაპია">რესპირატორული თერაპია</option>
                     </select>
                     <button type="button" id="addManipulationBtn" class="action-btn">დამატება</button>
                 </div>
@@ -83,15 +75,17 @@
                 <div class="exp-inputs">
                     <input type="text" id="expEmployer" placeholder="მიუთითეთ დამსაქმებელი">
                     <input type="text" id="expPosition" placeholder="მიუთითეთ პოზიცია">
-                    
+
                     <div class="exp-dates-row">
                         <div class="exp-date-wrapper">
                             <input type="text" id="expStartInput" placeholder="დაწყების თარიღი" readonly>
                             <div id="startCalendarModal" class="calendar-modal hidden">
                                 <div class="calendar-header">
-                                    <button type="button" id="prevStartCalBtn"><i class="fas fa-chevron-left"></i></button>
+                                    <button type="button" id="prevStartCalBtn"><i
+                                            class="fas fa-chevron-left"></i></button>
                                     <span id="startCalLabel"></span>
-                                    <button type="button" id="nextStartCalBtn"><i class="fas fa-chevron-right"></i></button>
+                                    <button type="button" id="nextStartCalBtn"><i
+                                            class="fas fa-chevron-right"></i></button>
                                 </div>
                                 <div id="startCalBody" class="calendar-body grid-3"></div>
                             </div>
@@ -101,9 +95,11 @@
                             <input type="text" id="expEndInput" placeholder="დასრულების თარიღი" readonly>
                             <div id="endCalendarModal" class="calendar-modal hidden">
                                 <div class="calendar-header">
-                                    <button type="button" id="prevEndCalBtn"><i class="fas fa-chevron-left"></i></button>
+                                    <button type="button" id="prevEndCalBtn"><i
+                                            class="fas fa-chevron-left"></i></button>
                                     <span id="endCalLabel"></span>
-                                    <button type="button" id="nextEndCalBtn"><i class="fas fa-chevron-right"></i></button>
+                                    <button type="button" id="nextEndCalBtn"><i
+                                            class="fas fa-chevron-right"></i></button>
                                 </div>
                                 <div id="endCalBody" class="calendar-body grid-3"></div>
                             </div>
@@ -146,7 +142,7 @@
             </div>
 
             <div class="form-section">
-                
+
                 <div class="fields-gap-container">
                     <div class="input-wrapper">
                         <label>საკონტაქტო ნომერი <span class="required-star">*</span></label>
@@ -189,4 +185,5 @@
     <script src="js/navbar-router.js"></script>
     <script src="js/register-nurse.js"></script>
 </body>
+
 </html>
