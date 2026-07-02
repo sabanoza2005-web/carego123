@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
+
     // 1. Smooth scroll for navigation & Auth/Profile routing
     document.querySelectorAll("nav a").forEach((link) => {
         link.addEventListener("click", function (e) {
@@ -9,12 +10,19 @@ document.addEventListener("DOMContentLoaded", async () => {
                 e.preventDefault(); // ვაჩერებთ სტანდარტულ გადასვლას
 
                 // ვამოწმებთ, არის თუ არა მომხმარებელი უკვე სისტემაში შესული
-                const isLoggedIn = localStorage.getItem("isLoggedIn");
+                let user = null;
+                try { user = JSON.parse(localStorage.getItem("user")); } catch(e) {}
 
-                if (isLoggedIn === "true") {
+                if (user && user.isLoggedIn) {
                     // თუ შესულია, გადაგვყავს პროფილის გვერდზე
                     alert("თქვენ უკვე ავტორიზებული ხართ. გადადიხართ პროფილის გვერდზე...");
-                    window.location.href = "profile.html";
+                    if (user.role === "nurse") {
+                        window.location.href = "profile-nurse.html";
+                    } else if (user.role === "patient") {
+                        window.location.href = "profile-patient.html";
+                    } else {
+                        window.location.href = "profile.html";
+                    }
                 } else {
                     // თუ არ არის შესული, გადაგვყავს ლოგინის გვერდზე
                     window.location.href = "login.html";
@@ -182,10 +190,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 // Apply the same logic as in // 4. Service cards click interaction
                 serviceCard.style.cursor = "pointer";
                 serviceCard.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    const title = h3.innerText;
-                    alert(`სერვისის („${title}“) დასაჯავშნად გთხოვთ გაიაროთ ავტორიზაცია.`);
-                    window.location.href = "login.html";
+                    let currentUser = null;
+                    try { currentUser = JSON.parse(localStorage.getItem("user")); } catch(err) {}
+                    
+                    if (!currentUser || !currentUser.isLoggedIn) {
+                        e.preventDefault();
+                        const title = h3.innerText;
+                        alert(`სერვისის („${title}“) დასაჯავშნად გთხოვთ გაიაროთ ავტორიზაცია.`);
+                        window.location.href = "login.html";
+                    }
+                    // If logged in, it will naturally navigate to serviceCard.href
                 });
 
                 servicesEl.append(serviceCard);

@@ -66,19 +66,59 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // გ) პაროლის სიმძლავრის შემოწმება (მაკეტის შეცდომის ტექსტი)
-            if (passwordValue.length < 8 || !/[A-Z]/.test(passwordValue) || !/[a-z]/.test(passwordValue) || !/\d/.test(passwordValue) || !/[@$!%*?&]/.test(passwordValue)) {
-                showErrorMessage("ბოდიშს გიხდით, თქვენი პაროლი არასწორია. გთხოვთ ახლიდან სცადოთ.");
-                return;
-            }
 
-            // თუ ყველაფერი სწორია, ვშლით შეცდომის ტექსტს და შევდივართ საიტზე
+
+            // თუ ყველაფერი სწორია, ვშლით შეცდომის ტექსტს
             let existingError = document.querySelector(".error-message");
             if (existingError) existingError.remove();
 
-            alert(`ავტორიზაცია წარმატებულია!\nმომხმარებელი: ${emailValue}`);
-            localStorage.setItem("isLoggedIn", "true"); 
-            window.location.href = "index.html"; 
+            const submitBtn = authForm.querySelector("button[type='submit']");
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "მიმდინარეობს შესვლა...";
+            }
+
+            fetch("https://carego.onrender.com/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: emailValue, password: passwordValue })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.token && data.data) {
+                    const user = {
+                        token: data.token,
+                        isLoggedIn: true,
+                        role: data.data.role
+                    };
+                    localStorage.setItem("user", JSON.stringify(user));
+                    
+                    // Redirect based on role
+                    if (user.role === "nurse") {
+                        window.location.href = "profile-nurse.html";
+                    } else if (user.role === "patient") {
+                        window.location.href = "profile-patient.html";
+                    } else {
+                        window.location.href = "index.html";
+                    }
+                } else {
+                    showErrorMessage(data.message || "ელ-ფოსტა ან პაროლი არასწორია.");
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "შესვლა";
+                    }
+                }
+            })
+            .catch(err => {
+                console.error("Login error:", err);
+                showErrorMessage("კავშირის შეცდომა. გთხოვთ სცადოთ მოგვიანებით.");
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "შესვლა";
+                }
+            });
         });
     }
 

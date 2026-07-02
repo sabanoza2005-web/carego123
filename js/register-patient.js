@@ -222,8 +222,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (isValid) {
                 document.querySelectorAll(".error-msg").forEach(el => el.textContent = "");
-                console.log("პაციენტის რეგისტრაცია წარმატებულია!");
-                // აქ განთავსდება ბექენდზე (API ან LocalStorage) გაგზავნის ლოგიკა
+                
+                const submitBtn = patientForm.querySelector(".submit-form-btn") || patientForm.querySelector("button[type='submit']");
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = "იგზავნება...";
+                }
+
+                const payload = {
+                    firstname: nameInput.value.trim(),
+                    lastname: surnameInput.value.trim(),
+                    birthDate: birthDate.toISOString().split('T')[0],
+                    email: emailInput.value.trim(),
+                    password: passwordInput.value,
+                    repeatPassword: confirmPasswordInput.value,
+                    mobile: phoneInput.value.trim(),
+                    address: addressInput.value.trim(),
+                    governmentId: idInput.value.trim()
+                };
+
+                fetch("https://carego.onrender.com/api/patients/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.token) {
+                        const user = {
+                            token: data.token,
+                            isLoggedIn: true,
+                            role: "patient"
+                        };
+                        localStorage.setItem("user", JSON.stringify(user));
+                        window.location.href = "profile-patient.html";
+                    } else {
+                        alert(data.message || "რეგისტრაცია ვერ მოხერხდა. სცადეთ თავიდან.");
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = "რეგისტრაციის დასრულება";
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.error("Registration error:", err);
+                    alert("კავშირის შეცდომა. გთხოვთ სცადოთ მოგვიანებით.");
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "რეგისტრაციის დასრულება";
+                    }
+                });
             }
         });
     }

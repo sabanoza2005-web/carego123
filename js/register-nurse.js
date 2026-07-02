@@ -562,10 +562,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.success && data.token) {
-                        localStorage.setItem("token", data.token);
-                        localStorage.setItem("isLoggedIn", "true");
-                        localStorage.setItem("userRole", "nurse");
-                        window.location.href = "profile-nurse.html";
+                        const user = {
+                            token: data.token,
+                            isLoggedIn: true,
+                            role: "nurse"
+                        };
+                        localStorage.setItem("user", JSON.stringify(user));
+                        
+                        if (user.role === "nurse") {
+                            window.location.href = "profile-nurse.html";
+                        }
                     } else {
                         const msg = data.message || "რეგისტრაცია ვერ მოხერხდა. სცადეთ თავიდან.";
                         alert(msg);
