@@ -57,6 +57,7 @@
                     <button type="button" id="addSpecBtn" class="action-btn">დამატება</button>
                 </div>
                 <div id="specializationsContainer" class="tags-container"></div>
+                <span class="error-msg" id="specializationError"></span>
             </div>
 
             <div class="form-section invisible-box">
@@ -68,6 +69,7 @@
                     <button type="button" id="addManipulationBtn" class="action-btn">დამატება</button>
                 </div>
                 <div id="manipulationsContainer" class="tags-container"></div>
+                <span class="error-msg" id="manipulationError"></span>
             </div>
 
             <div class="form-section invisible-box experience-section">
@@ -148,6 +150,12 @@
                         <label>საკონტაქტო ნომერი <span class="required-star">*</span></label>
                         <input type="text" id="nursePhone" placeholder="">
                         <span class="error-msg" id="phoneError"></span>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>მისამართი <span class="required-star">*</span></label>
+                        <input type="text" id="nurseAddress" placeholder="ჩაწერეთ მისამართი">
+                        <span class="error-msg" id="addressError"></span>
                     </div>
 
                     <div class="input-wrapper">

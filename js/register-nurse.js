@@ -180,15 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 if (data && data.success && Array.isArray(data.data)) {
                     data.data.forEach(serviceName => {
-                        const exists = Array.from(manipulationSelect.options).some(
-                            option => option.value.trim() === serviceName.trim()
-                        );
-                        if (!exists) {
-                            const option = document.createElement("option");
-                            option.value = serviceName;
-                            option.textContent = serviceName;
-                            manipulationSelect.appendChild(option);
-                        }
+                        const option = document.createElement("option");
+                        option.value = serviceName;
+                        option.textContent = serviceName;
+                        manipulationSelect.appendChild(option);
                     });
                 }
             })
@@ -255,13 +250,15 @@ document.addEventListener("DOMContentLoaded", () => {
         currentJobToggle.addEventListener("change", () => {
             if (currentJobToggle.checked) {
                 expEndWrapper.style.opacity = "0.4";
-                expEndInput.value = "დღემდე";
                 expEndInput.style.pointerEvents = "none";
-                selectedEndMonth = null;
+                // Store actual current date so the API receives a real ISO end date
+                selectedEndMonth = { month: currentMonth, year: currentYear };
+                expEndInput.value = `${monthsGeo[currentMonth]}, ${currentYear}`;
             } else {
                 expEndWrapper.style.opacity = "1";
-                expEndInput.value = "";
                 expEndInput.style.pointerEvents = "auto";
+                expEndInput.value = "";
+                selectedEndMonth = null;
             }
         });
     }
@@ -339,10 +336,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (mos === 0) durationText = "1 თვეზე ნაკლები";
             }
 
-            experienceList.push({ employer: emp, position: pos, period: `${startVal} - ${endVal}`, duration: durationText });
+            const toISO = (sel) => sel ? `${sel.year}-${String(sel.month + 1).padStart(2, '0')}-01` : null;
+            const endISO = currentJobToggle.checked ? new Date().toISOString().split('T')[0] : toISO(selectedEndMonth);
+            experienceList.push({
+                employer: emp,
+                position: pos,
+                period: `${startVal} - ${endVal}`,
+                duration: durationText,
+                startDate: toISO(selectedStartMonth),
+                endDate: endISO
+            });
             renderExperienceCards();
 
             expEmployer.value = ""; expPosition.value = ""; expStartInput.value = ""; expEndInput.value = "";
+            selectedStartMonth = null;
+            selectedEndMonth = null;
             if (currentJobToggle.checked) {
                 currentJobToggle.checked = false;
                 expEndWrapper.style.opacity = "1";
@@ -450,6 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nameInput = document.getElementById("nurseName");
     const surnameInput = document.getElementById("nurseSurname");
     const phoneInput = document.getElementById("nursePhone");
+    const addressInput = document.getElementById("nurseAddress");
     const idInput = document.getElementById("nurseId");
     const emailInput = document.getElementById("nurseEmail");
     const passwordInput = document.getElementById("nursePassword");
@@ -487,6 +496,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!surnameInput.value.trim()) { document.getElementById("surnameError").textContent = "გვარის შეყვანა აუცილებელია!"; isValid = false; } else document.getElementById("surnameError").textContent = "";
             if (!birthDate) { document.getElementById("dobInput").nextElementSibling.textContent = "მიუთითეთ დაბადების თარიღი!"; isValid = false; }
             if (phoneInput.value.length < 9) { document.getElementById("phoneError").textContent = "არასწორი ნომერი (მინ. 9 ციფრი)"; isValid = false; } else document.getElementById("phoneError").textContent = "";
+            if (!addressInput.value.trim()) { document.getElementById("addressError").textContent = "მისამართის შეყვანა აუცილებელია!"; isValid = false; } else document.getElementById("addressError").textContent = "";
             if (idInput.value.length !== 11) { document.getElementById("idError").textContent = "პირადი ნომერი უნდა შედგებოდეს 11 ციფრისგან!"; isValid = false; } else document.getElementById("idError").textContent = "";
 
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -501,17 +511,74 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!avatarFile) { document.getElementById("avatarError").textContent = "პროფილის ფოტოს ატვირთვა აუცილებელია!"; isValid = false; } else document.getElementById("avatarError").textContent = "";
             if (documentsList.length === 0) { document.getElementById("docsError").textContent = "დიპლომის ან სერტიფიკატის ატვირთვა აუცილებელია!"; isValid = false; } else document.getElementById("docsError").textContent = "";
 
-            if (isValid) {
-                document.querySelectorAll(".error-msg").forEach(el => el.textContent = "");
-                console.log("ექთნის რეგისტრაცია წარმატებულია!", {
-                    personal: { name: nameInput.value, surname: surnameInput.value, dob: dobInput.value, phone: phoneInput.value, id: idInput.value, email: emailInput.value },
-                    avatar: avatarFile,
-                    documents: documentsList,
-                    specializations: specializationsList,
-                    manipulations: manipulationsList,
-                    experience: experienceList
-                });
+            // სიების სავალდებულო ვალიდაცია
+            if (specializationsList.length === 0) { document.getElementById("specializationError").textContent = "მინიმუმ ერთი სპეციალიზაცია აუცილებელია!"; isValid = false; } else document.getElementById("specializationError").textContent = "";
+            if (manipulationsList.length === 0) { document.getElementById("manipulationError").textContent = "მინიმუმ ერთი მანიპულაცია აუცილებელია!"; isValid = false; } else document.getElementById("manipulationError").textContent = "";
+            if (experienceList.length === 0) { document.getElementById("experienceError").textContent = "მინიმუმ ერთი სამუშაო გამოცდილება აუცილებელია!"; isValid = false; } else document.getElementById("experienceError").textContent = "";
+
+            if (!isValid) {
+                const firstError = Array.from(document.querySelectorAll(".error-msg")).find(el => el.textContent.trim() !== "");
+                if (firstError) {
+                    // Scroll to the parent section/wrapper for better visibility
+                    const scrollTarget = firstError.closest('.input-wrapper, .form-section') || firstError;
+                    scrollTarget.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+                return;
             }
+
+            document.querySelectorAll(".error-msg").forEach(el => el.textContent = "");
+
+            const submitBtn = nurseForm.querySelector(".submit-form-btn");
+            submitBtn.disabled = true;
+            submitBtn.textContent = "იგზავნება...";
+
+                const formData = new FormData();
+                formData.append("firstname", nameInput.value.trim());
+                formData.append("lastname", surnameInput.value.trim());
+                formData.append("email", emailInput.value.trim());
+                formData.append("password", passwordInput.value);
+                formData.append("repeatPassword", confirmPasswordInput.value);
+                formData.append("birthDate", birthDate.toISOString().split('T')[0]);
+                formData.append("mobile", phoneInput.value.trim());
+                formData.append("address", addressInput.value.trim());
+                formData.append("governmentId", idInput.value.trim());
+                formData.append("photo", avatarFile);
+                documentsList.forEach(doc => formData.append("diplomas", doc));
+                formData.append("specialization", JSON.stringify(specializationsList));
+                formData.append("manipulations", JSON.stringify(manipulationsList));
+                formData.append("workExperience", JSON.stringify(
+                    experienceList.map(exp => ({
+                        employer: exp.employer,
+                        position: exp.position,
+                        startDate: exp.startDate,
+                        endDate: exp.endDate
+                    }))
+                ));
+
+                fetch("https://carego.onrender.com/api/nurses/register", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.token) {
+                        localStorage.setItem("token", data.token);
+                        localStorage.setItem("isLoggedIn", "true");
+                        localStorage.setItem("userRole", "nurse");
+                        window.location.href = "profile-nurse.html";
+                    } else {
+                        const msg = data.message || "რეგისტრაცია ვერ მოხერხდა. სცადეთ თავიდან.";
+                        alert(msg);
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "რეგისტრაციის დასრულება";
+                    }
+                })
+                .catch(err => {
+                    console.error("Registration error:", err);
+                    alert("კავშირის შეცდომა. გთხოვთ სცადოთ მოგვიანებით.");
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "რეგისტრაციის დასრულება";
+                });
         });
     }
 
