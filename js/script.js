@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 // ვამოწმებთ, არის თუ არა მომხმარებელი უკვე სისტემაში შესული
                 let user = null;
-                try { user = JSON.parse(localStorage.getItem("user")); } catch(e) {}
+                try { user = JSON.parse(localStorage.getItem("user")); } catch (e) { }
 
                 if (user && user.isLoggedIn) {
                     // თუ შესულია, გადაგვყავს პროფილის გვერდზე
@@ -55,9 +55,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         nursesContainer.addEventListener("click", (e) => {
             const card = e.target.closest(".nurse-card");
             if (card) {
+                let currentUser = null;
+                try { currentUser = JSON.parse(localStorage.getItem("user")); } catch(err) {}
+
                 const nurseName = card.querySelector("h3").innerText;
-                alert(`ექთანთან (${nurseName}) დასაკავშირებლად საჭიროა სისტემაში შესვლა.`);
-                window.location.href = "login.html";
+
+                if (currentUser && currentUser.isLoggedIn) {
+                    alert(`თქვენ აირჩიეთ ექთანი: ${nurseName}\n\nსისტემა ამოწმებს ექთნის აქტიურ სტატუსს...`);
+                } else {
+                    alert(`ექთანთან (${nurseName}) დასაკავშირებლად საჭიროა სისტემაში შესვლა.`);
+                    window.location.href = "login.html";
+                }
             }
         });
     }
@@ -191,8 +199,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 serviceCard.style.cursor = "pointer";
                 serviceCard.addEventListener("click", (e) => {
                     let currentUser = null;
-                    try { currentUser = JSON.parse(localStorage.getItem("user")); } catch(err) {}
-                    
+                    try { currentUser = JSON.parse(localStorage.getItem("user")); } catch (err) { }
+
                     if (!currentUser || !currentUser.isLoggedIn) {
                         e.preventDefault();
                         const title = h3.innerText;
